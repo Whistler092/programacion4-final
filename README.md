@@ -21,7 +21,6 @@ El sistema debe Permitir Controlar en una bodega los inventarios entrantes y sal
     * Diagrama de Clases.
     * Historias de Usuario.
     * Diagrama de Casos de Uso
-	   
 23 Mayo. Estado 60%
 6 Junio. Estado: 90%
 20 Junio. 100% Terminación del proyecto 
