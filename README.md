@@ -15,12 +15,12 @@ El sistema debe Permitir Controlar en una bodega los inventarios entrantes y sal
 
 1 Abril. Inicio del proyecto
 9 Mayo. Estado 30% [Primera Entrega]
-    * Documento:
-      * Introducción.
-      * Descripción de los alcances.
-      * Diagrama de Clases.
-      * Historias de Usuario.
-      * Diagrama de Casos de Uso
+  * Documento:
+    * Introducción.
+    * Descripción de los alcances.
+    * Diagrama de Clases.
+    * Historias de Usuario.
+    * Diagrama de Casos de Uso
 	   
 23 Mayo. Estado 60%
 6 Junio. Estado: 90%
