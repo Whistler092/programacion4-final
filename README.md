@@ -13,8 +13,8 @@ El sistema debe Permitir Controlar en una bodega los inventarios entrantes y sal
 	
 ### Roadmap del proyecto 
 
-- 1 Abril. Inicio del proyecto
-- 9 Mayo. Estado 30% [Primera Entrega]
+1 Abril. Inicio del proyecto
+9 Mayo. Estado 30% [Primera Entrega]
     * Documento:
       * Introducción.
       * Descripción de los alcances.
@@ -22,7 +22,7 @@ El sistema debe Permitir Controlar en una bodega los inventarios entrantes y sal
       * Historias de Usuario.
       * Diagrama de Casos de Uso
 	   
-- 23 Mayo. Estado 60%
-- 6 Junio. Estado: 90%
-- 20 Junio. 100% Terminación del proyecto 
-- 27 Junio. Entrega del proyecto
+23 Mayo. Estado 60%
+6 Junio. Estado: 90%
+20 Junio. 100% Terminación del proyecto 
+27 Junio. Entrega del proyecto
