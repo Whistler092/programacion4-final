@@ -7,20 +7,24 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <div id="containerlogin" class="well">
-        <h:form class="form-horizontal">
-            <fieldset>
-                <center><h:graphicImage url="resources/img/login.png" /></center>
-                <br></br>
-                <div class="form-group">
-                    <h:inputText class="form-control" id="username" p:placeholder="Nombre de Usuario" value="#{controllerUsers.u.name}"></h:inputText>
-                </div>
-                <div class="form-group">
-                    <h:inputSecret class="form-control" id="password" p:placeholder="Contaseña de Usuario" value="#{controllerUsers.u.passwordUser}"></h:inputSecret>
-                </div>
-                <center><h:commandLink class="btn btn-primary btn-primary" action="#{options.setUrlOption(controllerUsers.searchUsers())}"> Ingresar </h:commandLink></center>
-            </fieldset>
-        </h:form>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h:form class="form-horizontal">
+                    <fieldset>
+                        <center><h:graphicImage url="resources/img/login.png" /></center>
+                        <br></br>
+                        <div class="form-group">
+                            <h:inputText class="form-control" id="username" p:placeholder="Nombre de Usuario" value="#{controllerUsers.u.name}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <h:inputSecret class="form-control" id="password" p:placeholder="Contaseña de Usuario" value="#{controllerUsers.u.passwordUser}"></h:inputSecret>
+                        </div>
+                        <center><h:commandLink class="btn btn-primary btn-primary" action="#{options.setUrlOption(controllerUsers.searchUsers())}"> Ingresar </h:commandLink></center>
+                    </fieldset>
+                </h:form>
+            </div>
+            <div class="col-md-4"></div>
         </div>
     </h:body>
 </html>

@@ -8,14 +8,18 @@ and open the template in the editor.
     Author     : David Zuluaga
 */
 #containerlogin{
-    position: absolute;
-    width: 350px;
-    margin-top: 250px;
-    margin-left: 40%;
+    /*position: absolute;*/
+    width: 150px;
+    /*margin-top: 250px;
+    margin-left: 40%;*/
+}
+
+.containerlogin_center{
+    margin-left: 35%;
+    text-align: center;
 }
 
 #containerlogin img{
     width: 130px;
-    margin-top: -90px;
     text-align: center;
 }
