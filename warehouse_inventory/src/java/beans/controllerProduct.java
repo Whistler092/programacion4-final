@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import logica.Items;
 
 /**
@@ -19,7 +20,7 @@ import logica.Items;
 @Named(value = "controllerProduct")
 @SessionScoped
 public class controllerProduct implements Serializable {
-Items i = new Items();
+    Items i = new Items();
     List<Items> listitems;
     boolean disabled;
     String visibilityCreate = "inline",visibilityEdit = "none",visibilityUpdate = "none";
@@ -94,7 +95,7 @@ Items i = new Items();
         visibilityCreate = "inline";
         i = new Items();
     }
-    public void buscarP(){
+    public void searchP(){
         titulo = "Buscar Producto";
         disabled = true;
         visibilityEdit = "inline";
@@ -102,7 +103,13 @@ Items i = new Items();
         visibilityUpdate = "none";
     }
     
-   
+    public void editproduct(){
+        disabled = false;
+        visibilityUpdate = "inline";
+        visibilityCreate = "none";
+        visibilityEdit = "none";
+    }
+    
     public void additem(){
         i.setColor(0);
         i.setLot(0);
@@ -112,5 +119,28 @@ Items i = new Items();
         em.persist(i);
         em.getTransaction().commit();
         i = new Items();
+    }
+    public void searchProduct(){
+        EntityManager em = i.getEntityManager();
+        TypedQuery<Items> consultarProducto = em.createNamedQuery("Items.findByCode",Items.class);
+        consultarProducto.setParameter("code",i.getCode());
+        List<Items> productos = consultarProducto.getResultList();
+        if(productos.size()>0){
+            i = productos.get(0);
+        }else{
+            i = new Items();
+        }
+    }
+    public void updateproduct(){
+        //obtener el entitymanager
+        EntityManager em = i.getEntityManager();
+        //captura la transaccion realizada y la inicio
+        em.getTransaction().begin();
+        //guarda en la base de datos la entidad
+        em.merge(i);
+        //termina la transcaccion
+        em.getTransaction().commit();
+        i = new Items();
+        searchP();
     }
 }

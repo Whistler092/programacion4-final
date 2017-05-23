@@ -15,7 +15,7 @@
                            <h:form class="form-horizontal">
                                <center> 
                                    <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProduct.crearP()}" > Crear Producto </h:commandLink>
-                                   <h:commandLink class="btn btn-info btn-primary" action="#{controllerProduct.buscarP()}" > Buscar Producto </h:commandLink>
+                                   <h:commandLink class="btn btn-info btn-primary" action="#{controllerProduct.searchP()}" > Buscar Producto </h:commandLink>
                                </center><br></br>
                                <fieldset>
                                    <legend><h:outputLabel value="#{controllerProduct.titulo}"></h:outputLabel></legend>
@@ -27,7 +27,7 @@
                                            </h:inputText>
                                        </div>
                                        <div class="col-lg-1 control-label">
-                                           <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProduct.visibilityEdit};"> 
+                                           <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProduct.visibilityEdit};" action="#{controllerProduct.searchProduct()}"> 
                                                <h:graphicImage url="resources/img/search.png" styleClass="searchproduct" />
                                            </h:commandLink>
                                        </div>
@@ -49,7 +49,13 @@
                                            </h:inputText>
                                        </div>
                                    </div>
-                                   <center> <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProduct.additem()}"> Crear Producto</h:commandLink></center>
+                                   <center> 
+                                       <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProduct.editproduct()}"  style="display: #{controllerProduct.visibilityEdit};"> Editar </h:commandLink>
+                                       <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProduct.deleteproduct()}" style="display: #{controllerProduct.visibilityEdit};"> Eliminar </h:commandLink>
+                                       <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProduct.additem()}" style="display: #{controllerProduct.visibilityCreate};"> Crear Producto</h:commandLink>
+                                       <h:commandLink class="btn btn-success btn-primary" action="#{controllerProduct.updateproduct()}"  style="display: #{controllerProduct.visibilityUpdate};"> Actualizar</h:commandLink>
+                                       <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProduct.searchP()}"  style="display: #{controllerProduct.visibilityUpdate};"> Cancelar </h:commandLink>
+                                   </center>
                                    
                                </fieldset>
                            </h:form>
