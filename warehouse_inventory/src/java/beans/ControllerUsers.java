@@ -24,6 +24,7 @@ import logica.UsersType;
 @SessionScoped
 public class ControllerUsers implements Serializable {
     Users u = new Users();
+    Users ulogin = new Users();
     UsersType ut = new UsersType();
     UsersType temput = new UsersType();
     List<UsersType> allut;
@@ -103,6 +104,14 @@ public class ControllerUsers implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Users getUlogin() {
+        return ulogin;
+    }
+
+    public void setUlogin(Users ulogin) {
+        this.ulogin = ulogin;
+    }
     
     
     
@@ -129,16 +138,26 @@ public class ControllerUsers implements Serializable {
          //captura de listado de la consulta
         allu = consuluser.getResultList();
     }
-    public int searchUsers(){
+    public String searchUsers(){
+        String loginusers = "";
         int i = 1;
         if(u.getName() != null && u.getPasswordUser() != null){
             for (Users user : allu) {
                 if(user.getName().trim().equals(u.getName().trim()) && user.getPasswordUser().equals(u.getPasswordUser())){
-                    u = user;
-                    i = 3;
+                    if(isLogIn){
+                        u = user;
+                        loginusers = "Users";
+                    }
+                    else{
+                        ulogin = user;
+                        isLogIn = true;
+                        i = 3;
+                        loginusers = "Login";
+                        u = new Users();
+                    }
                 }
             }
         }
-        return i;
+        return loginusers;
     }
 }

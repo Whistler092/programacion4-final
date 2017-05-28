@@ -39,6 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Users.findByIsActived", query = "SELECT u FROM Users u WHERE u.isActived = :isActived")})
 public class Users implements Serializable {
 
+    @Column(name = "isActived")
+    private Boolean isActived;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,10 +54,6 @@ public class Users implements Serializable {
     @Size(max = 45)
     @Column(name = "password_user")
     private String passwordUser;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "isActived")
-    private boolean isActived;
     @JoinColumn(name = "idusers_type", referencedColumnName = "idusers_type")
     @ManyToOne(optional = false)
     private UsersType idusersType;
@@ -95,13 +94,6 @@ public class Users implements Serializable {
         this.passwordUser = passwordUser;
     }
 
-    public boolean getIsActived() {
-        return isActived;
-    }
-
-    public void setIsActived(boolean isActived) {
-        this.isActived = isActived;
-    }
 
     public UsersType getIdusersType() {
         return idusersType;
@@ -139,5 +131,13 @@ public class Users implements Serializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_inventoryPU");
         EntityManager em = emf.createEntityManager();
         return em;
+    }
+
+    public Boolean getIsActived() {
+        return isActived;
+    }
+
+    public void setIsActived(Boolean isActived) {
+        this.isActived = isActived;
     }
 }

@@ -137,6 +137,10 @@ public class ControllerProperties implements Serializable {
     public int moveProperties(String move){
         int opt = 0;
         switch (move){
+            case "Login":
+                moveP("Usuario");
+                opt = 5;
+                break;
             case "Product":
                 moveP("Producto");
                 opt = 3;
