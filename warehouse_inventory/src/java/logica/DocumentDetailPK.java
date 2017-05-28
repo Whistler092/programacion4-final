@@ -111,7 +111,7 @@ public class DocumentDetailPK implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.DocumentDetailPK[ documentdatailId=" + documentdatailId + ", documentId=" + documentId + ", warehousesId=" + warehousesId + ", itemId=" + itemId + " ]";
+        return "logicaa.DocumentDetailPK[ documentdatailId=" + documentdatailId + ", documentId=" + documentId + ", warehousesId=" + warehousesId + ", itemId=" + itemId + " ]";
     }
     
 }

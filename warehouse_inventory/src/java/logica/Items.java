@@ -22,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -41,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Items.findByLot", query = "SELECT i FROM Items i WHERE i.lot = :lot")
     , @NamedQuery(name = "Items.findByColor", query = "SELECT i FROM Items i WHERE i.color = :color")
     , @NamedQuery(name = "Items.findBySize", query = "SELECT i FROM Items i WHERE i.size = :size")
-    , @NamedQuery(name = "Items.findByPrice", query = "SELECT i FROM Items i WHERE i.price = :price")})
+    , @NamedQuery(name = "Items.findByPrice", query = "SELECT i FROM Items i WHERE i.price = :price")
+    , @NamedQuery(name = "Items.findByIsActived", query = "SELECT i FROM Items i WHERE i.isActived = :isActived")})
 public class Items implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,10 +52,14 @@ public class Items implements Serializable {
     @Basic(optional = false)
     @Column(name = "itemId")
     private Integer itemId;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "code")
     private String code;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
     @Column(name = "lot")
@@ -63,8 +69,14 @@ public class Items implements Serializable {
     @Column(name = "size")
     private Integer size;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    //@NotNull
     @Column(name = "price")
     private BigDecimal price;
+    @Basic(optional = true)
+    //@NotNull
+    @Column(name = "isActived")
+    private boolean isActived;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "items")
     private Collection<DocumentDetail> documentDetailCollection;
 
@@ -73,6 +85,14 @@ public class Items implements Serializable {
 
     public Items(Integer itemId) {
         this.itemId = itemId;
+    }
+
+    public Items(Integer itemId, String code, String name, BigDecimal price, boolean isActived) {
+        this.itemId = itemId;
+        this.code = code;
+        this.name = name;
+        this.price = price;
+        this.isActived = isActived;
     }
 
     public Integer getItemId() {
@@ -131,6 +151,14 @@ public class Items implements Serializable {
         this.price = price;
     }
 
+    public boolean getIsActived() {
+        return isActived;
+    }
+
+    public void setIsActived(boolean isActived) {
+        this.isActived = isActived;
+    }
+
     @XmlTransient
     public Collection<DocumentDetail> getDocumentDetailCollection() {
         return documentDetailCollection;
@@ -162,9 +190,8 @@ public class Items implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.Items[ itemId=" + itemId + " ]";
+        return "logicaa.Items[ itemId=" + itemId + " ]";
     }
-        
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_inventoryPU");
         EntityManager em = emf.createEntityManager();

@@ -6,17 +6,21 @@
 package logica;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,42 +33,50 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findByUsersId", query = "SELECT u FROM Users u WHERE u.usersPK.usersId = :usersId")
+    , @NamedQuery(name = "Users.findByUsersId", query = "SELECT u FROM Users u WHERE u.usersId = :usersId")
     , @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name")
     , @NamedQuery(name = "Users.findByPasswordUser", query = "SELECT u FROM Users u WHERE u.passwordUser = :passwordUser")
-    , @NamedQuery(name = "Users.findByIdusersType", query = "SELECT u FROM Users u WHERE u.usersPK.idusersType = :idusersType")})
+    , @NamedQuery(name = "Users.findByIsActived", query = "SELECT u FROM Users u WHERE u.isActived = :isActived")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UsersPK usersPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "users_id")
+    private Integer usersId;
     @Size(max = 45)
     @Column(name = "name")
     private String name;
     @Size(max = 45)
     @Column(name = "password_user")
     private String passwordUser;
-    @JoinColumn(name = "idusers_type", referencedColumnName = "idusers_type", insertable = false, updatable = false)
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "isActived")
+    private boolean isActived;
+    @JoinColumn(name = "idusers_type", referencedColumnName = "idusers_type")
     @ManyToOne(optional = false)
-    private UsersType usersType;
+    private UsersType idusersType;
 
     public Users() {
     }
 
-    public Users(UsersPK usersPK) {
-        this.usersPK = usersPK;
+    public Users(Integer usersId) {
+        this.usersId = usersId;
     }
 
-    public Users(int usersId, int idusersType) {
-        this.usersPK = new UsersPK(usersId, idusersType);
+    public Users(Integer usersId, boolean isActived) {
+        this.usersId = usersId;
+        this.isActived = isActived;
     }
 
-    public UsersPK getUsersPK() {
-        return usersPK;
+    public Integer getUsersId() {
+        return usersId;
     }
 
-    public void setUsersPK(UsersPK usersPK) {
-        this.usersPK = usersPK;
+    public void setUsersId(Integer usersId) {
+        this.usersId = usersId;
     }
 
     public String getName() {
@@ -83,18 +95,26 @@ public class Users implements Serializable {
         this.passwordUser = passwordUser;
     }
 
-    public UsersType getUsersType() {
-        return usersType;
+    public boolean getIsActived() {
+        return isActived;
     }
 
-    public void setUsersType(UsersType usersType) {
-        this.usersType = usersType;
+    public void setIsActived(boolean isActived) {
+        this.isActived = isActived;
+    }
+
+    public UsersType getIdusersType() {
+        return idusersType;
+    }
+
+    public void setIdusersType(UsersType idusersType) {
+        this.idusersType = idusersType;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usersPK != null ? usersPK.hashCode() : 0);
+        hash += (usersId != null ? usersId.hashCode() : 0);
         return hash;
     }
 
@@ -105,7 +125,7 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.usersPK == null && other.usersPK != null) || (this.usersPK != null && !this.usersPK.equals(other.usersPK))) {
+        if ((this.usersId == null && other.usersId != null) || (this.usersId != null && !this.usersId.equals(other.usersId))) {
             return false;
         }
         return true;
@@ -113,9 +133,8 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.Users[ usersPK=" + usersPK + " ]";
+        return "logicaa.Users[ usersId=" + usersId + " ]";
     }
-        
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_inventoryPU");
         EntityManager em = emf.createEntityManager();

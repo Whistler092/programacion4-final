@@ -8,7 +8,9 @@ package beans;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
+import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import logica.Users;
@@ -20,19 +22,22 @@ import logica.UsersType;
  */
 @Named(value = "controllerUsers")
 @SessionScoped
-public class controllerUsers implements Serializable {
+public class ControllerUsers implements Serializable {
     Users u = new Users();
     UsersType ut = new UsersType();
+    UsersType temput = new UsersType();
     List<UsersType> allut;
     List<Users> allu;
     boolean isLogIn;
-    options o = new options();
+    SelectItem[] selectTypeUser;
+    String name = "Users";
     /**
      * Creates a new instance of controllerUsers
      */
-    public controllerUsers() {
+    public ControllerUsers() {
         this.listUserType();
         this.listUsers();
+        this.selectTypeUser();
     }
 
     public Users getU() {
@@ -73,6 +78,41 @@ public class controllerUsers implements Serializable {
 
     public void setIsLogIn(boolean isLogIn) {
         this.isLogIn = isLogIn;
+    }
+
+    public SelectItem[] getSelectTypeUser() {
+        return selectTypeUser;
+    }
+
+    public void setSelectTypeUser(SelectItem[] selectTypeUser) {
+        this.selectTypeUser = selectTypeUser;
+    }
+
+    public UsersType getTemput() {
+        return temput;
+    }
+
+    public void setTemput(UsersType temput) {
+        this.temput = temput;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
+    
+    public void selectTypeUser(){
+        selectTypeUser = new SelectItem[allut.size()];
+        
+        for(int i = 0; i < allut.size();i++){
+            UsersType utype = allut.get(i);
+            selectTypeUser[i] = new SelectItem(utype.getCodeType(), utype.getNameType());
+        }
     }
     
     public void listUserType(){

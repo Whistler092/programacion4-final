@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <h:inputSecret class="form-control" id="password" p:placeholder="Contaseña de Usuario" value="#{controllerUsers.u.passwordUser}"></h:inputSecret>
                         </div>
-                        <center><h:commandLink class="btn btn-primary btn-primary" action="#{options.setUrlOption(controllerUsers.searchUsers())}"> Ingresar </h:commandLink></center>
+                        <center><h:commandLink class="btn btn-primary btn-primary" action="#{options.setUrlOption(controllerProperties.moveProperties(controllerUsers.name))}"> Ingresar </h:commandLink></center>
                     </fieldset>
                 </h:form>
             </div>

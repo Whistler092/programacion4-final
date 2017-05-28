@@ -138,7 +138,7 @@ public class Document implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.Document[ documentId=" + documentId + " ]";
+        return "logicaa.Document[ documentId=" + documentId + " ]";
     }
     
 }

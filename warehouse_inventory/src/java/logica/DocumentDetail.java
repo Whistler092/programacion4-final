@@ -129,7 +129,7 @@ public class DocumentDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.DocumentDetail[ documentDetailPK=" + documentDetailPK + " ]";
+        return "logicaa.DocumentDetail[ documentDetailPK=" + documentDetailPK + " ]";
     }
     
 }

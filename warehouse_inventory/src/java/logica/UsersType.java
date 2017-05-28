@@ -51,7 +51,7 @@ public class UsersType implements Serializable {
     @Size(max = 2)
     @Column(name = "code_type")
     private String codeType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersType")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusersType")
     private Collection<Users> usersCollection;
 
     public UsersType() {
@@ -116,7 +116,7 @@ public class UsersType implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.UsersType[ idusersType=" + idusersType + " ]";
+        return "logicaa.UsersType[ idusersType=" + idusersType + " ]";
     }
     
     public EntityManager getEntityManager(){

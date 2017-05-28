@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`items` (
   `color` INT NULL,
   `size` INT NULL,
   `price` DECIMAL(16,4) NOT NULL DEFAULT 0,
+  `isActived` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`itemId`))
 ENGINE = InnoDB;
 
@@ -55,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`users` (
   `name` VARCHAR(45) NULL,
   `password_user` VARCHAR(45) NULL,
   `idusers_type` INT NOT NULL,
+  `isActived` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`users_id`),
   CONSTRAINT `fk_users_users_type`
     FOREIGN KEY (`idusers_type`)
@@ -73,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`warehouses` (
   `warehouses_Id` INT NOT NULL,
   `code` VARCHAR(45) NULL,
   `name` VARCHAR(45) NULL,
+  `isActived` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`warehouses_Id`))
 ENGINE = InnoDB;
 
@@ -150,7 +153,11 @@ INSERT INTO `inventory`.`users_type` (`name_type`, `code_type`) VALUES ('Consult
 INSERT INTO `inventory`.`users_type` (`name_type`, `code_type`) VALUES ('Jefe de Bodega', 'J');
 
 
-INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`) VALUES ('Javier', '123456', 1);
-INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`) VALUES ('Ramiro', '123456', 2);
-INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`) VALUES ('David', '123456', 1);
-INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`) VALUES ('Dz', '123456', 2);
+INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`, `isActived`) VALUES ('Javier', '123456', 1,1);
+INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`, `isActived`) VALUES ('Ramiro', '123456', 2,1);
+INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`, `isActived`) VALUES ('David', '123456', 1,1);
+INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`, `isActived`) VALUES ('Dz', '123456', 2,1);
+
+INSERT INTO `inventory`.`items` (`code`, `name`, `lot`, `color`, `size`, `price`, `isActived`) VALUES ('1', 'Portatil', '0', '0', '0', '1500000', '1');
+
+

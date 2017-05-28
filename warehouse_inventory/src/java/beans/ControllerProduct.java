@@ -19,7 +19,7 @@ import logica.Items;
  */
 @Named(value = "controllerProduct")
 @SessionScoped
-public class controllerProduct implements Serializable {
+public class ControllerProduct implements Serializable {
     Items i = new Items();
     List<Items> listitems;
     boolean disabled;
@@ -28,7 +28,7 @@ public class controllerProduct implements Serializable {
     /**
      * Creates a new instance of controllerProduct
      */
-    public controllerProduct() {
+    public ControllerProduct() {
     }
 
     public Items getI() {
@@ -110,7 +110,13 @@ public class controllerProduct implements Serializable {
         visibilityEdit = "none";
     }
     
-    public void additem(){
+    public void canceledit(){
+        searchProduct();
+        searchP();
+    }
+    
+    public void additem()
+    {
         i.setColor(0);
         i.setLot(0);
         i.setSize(0);
@@ -140,7 +146,7 @@ public class controllerProduct implements Serializable {
         em.merge(i);
         //termina la transcaccion
         em.getTransaction().commit();
-        i = new Items();
+        //i = new Items();
         searchP();
     }
 }

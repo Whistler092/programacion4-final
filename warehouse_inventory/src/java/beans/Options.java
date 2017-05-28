@@ -15,14 +15,14 @@ import java.io.Serializable;
  */
 @Named(value = "options")
 @SessionScoped
-public class options implements Serializable {
+public class Options implements Serializable {
     private int option;
     //Variables Url una para saber en que pantalla esta y la otra es para las Opciones de algun Menu
     private String url,urloption;
     /**
      * Creates a new instance of options
      */
-    public options() {
+    public Options() {
         this.setUrlOption(1);
     }
 
@@ -58,6 +58,12 @@ public class options implements Serializable {
                 break;
             case 3 :
                 url = "view/product/addProduct.xhtml";
+                break;
+            case 4 :
+                url = "view/warehouse/addWarehouse.xhtml";
+                break;
+            case 5 :
+                url = "view/users/users.xhtml";
                 break;
             case 6 :
                 url = "view/listusers.xhtml";

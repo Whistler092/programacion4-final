@@ -112,7 +112,7 @@ public class TypeDoc implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.TypeDoc[ typedocId=" + typedocId + " ]";
+        return "logicaa.TypeDoc[ typedocId=" + typedocId + " ]";
     }
     
 }

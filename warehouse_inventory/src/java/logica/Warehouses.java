@@ -11,10 +11,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,13 +37,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Warehouses.findAll", query = "SELECT w FROM Warehouses w")
     , @NamedQuery(name = "Warehouses.findByWarehousesId", query = "SELECT w FROM Warehouses w WHERE w.warehousesId = :warehousesId")
     , @NamedQuery(name = "Warehouses.findByCode", query = "SELECT w FROM Warehouses w WHERE w.code = :code")
-    , @NamedQuery(name = "Warehouses.findByName", query = "SELECT w FROM Warehouses w WHERE w.name = :name")})
+    , @NamedQuery(name = "Warehouses.findByName", query = "SELECT w FROM Warehouses w WHERE w.name = :name")
+    , @NamedQuery(name = "Warehouses.findByIsActived", query = "SELECT w FROM Warehouses w WHERE w.isActived = :isActived")})
 public class Warehouses implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "warehouses_Id")
     private Integer warehousesId;
     @Size(max = 45)
@@ -47,6 +53,10 @@ public class Warehouses implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "isActived")
+    private boolean isActived;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "warehouses")
     private Collection<DocumentDetail> documentDetailCollection;
 
@@ -55,6 +65,11 @@ public class Warehouses implements Serializable {
 
     public Warehouses(Integer warehousesId) {
         this.warehousesId = warehousesId;
+    }
+
+    public Warehouses(Integer warehousesId, boolean isActived) {
+        this.warehousesId = warehousesId;
+        this.isActived = isActived;
     }
 
     public Integer getWarehousesId() {
@@ -79,6 +94,14 @@ public class Warehouses implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean getIsActived() {
+        return isActived;
+    }
+
+    public void setIsActived(boolean isActived) {
+        this.isActived = isActived;
     }
 
     @XmlTransient
@@ -112,7 +135,12 @@ public class Warehouses implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.Warehouses[ warehousesId=" + warehousesId + " ]";
+        return "logicaa.Warehouses[ warehousesId=" + warehousesId + " ]";
     }
     
+    public EntityManager getEntityManager(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_inventoryPU");
+        EntityManager em = emf.createEntityManager();
+        return em;
+    }
 }
