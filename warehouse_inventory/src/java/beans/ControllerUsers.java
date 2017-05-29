@@ -26,7 +26,7 @@ public class ControllerUsers implements Serializable {
     Users u = new Users();
     Users ulogin = new Users();
     UsersType ut = new UsersType();
-    UsersType temput = new UsersType();
+    int temput;
     List<UsersType> allut;
     List<Users> allu;
     boolean isLogIn;
@@ -89,14 +89,6 @@ public class ControllerUsers implements Serializable {
         this.selectTypeUser = selectTypeUser;
     }
 
-    public UsersType getTemput() {
-        return temput;
-    }
-
-    public void setTemput(UsersType temput) {
-        this.temput = temput;
-    }
-
     public String getName() {
         return name;
     }
@@ -112,6 +104,14 @@ public class ControllerUsers implements Serializable {
     public void setUlogin(Users ulogin) {
         this.ulogin = ulogin;
     }
+
+    public int getTemput() {
+        return temput;
+    }
+
+    public void setTemput(int temput) {
+        this.temput = temput;
+    }
     
     
     
@@ -120,7 +120,7 @@ public class ControllerUsers implements Serializable {
         
         for(int i = 0; i < allut.size();i++){
             UsersType utype = allut.get(i);
-            selectTypeUser[i] = new SelectItem(utype.getCodeType(), utype.getNameType());
+            selectTypeUser[i] = new SelectItem(utype.getIdusersType(), utype.getNameType());
         }
     }
     
@@ -140,24 +140,76 @@ public class ControllerUsers implements Serializable {
     }
     public String searchUsers(){
         String loginusers = "";
-        int i = 1;
         if(u.getName() != null && u.getPasswordUser() != null){
             for (Users user : allu) {
-                if(user.getName().trim().equals(u.getName().trim()) && user.getPasswordUser().equals(u.getPasswordUser())){
-                    if(isLogIn){
-                        u = user;
-                        loginusers = "Users";
-                    }
-                    else{
-                        ulogin = user;
-                        isLogIn = true;
-                        i = 3;
-                        loginusers = "Login";
-                        u = new Users();
-                    }
+                if(isLogIn && user.getName().trim().equals(u.getName().trim())){
+                    u = user;
+                    temput = 2;
+                    loginusers = "Users";
+                }
+                else if(user.getName().trim().equals(u.getName().trim()) && user.getPasswordUser().equals(u.getPasswordUser())){
+                    ulogin = user;
+                    isLogIn = true;
+                    loginusers = "Login";
+                    u = new Users();
+                    break;
                 }
             }
         }
         return loginusers;
+    }
+    
+    public boolean newU(){
+        u = new Users();
+        return true;
+    }
+    
+    public void addUsers()
+    {
+        for(int i = 0; i < allut.size(); i++){
+            if(allut.get(i).getIdusersType() == temput){
+                u.setIdusersType(allut.get(i));
+            }
+        }
+        EntityManager em = u.getEntityManager();
+        em.getTransaction().begin();
+        em.persist(u);
+        em.getTransaction().commit();
+        u = new Users();
+    }
+    /*public void searchUsers(){
+        EntityManager em = u.getEntityManager();
+        TypedQuery<Users> consultwarehouse = em.createNamedQuery("Warehouses.findByCode",Users.class);
+        consultwarehouse.setParameter("code",u.getName());
+        List<Users> user = consultwarehouse.getResultList();
+        if(user.size()>0){
+            u = user.get(0);
+        }else{
+            u = new Users();
+        }
+    }*/
+    public boolean updateUsers(){
+        boolean terminate = false;
+        try {
+            //obtener el entitymanager
+            EntityManager em = u.getEntityManager();
+            //captura la transaccion realizada y la inicio
+            em.getTransaction().begin();
+            //guarda en la base de datos la entidad
+            em.merge(u);
+            //termina la transcaccion
+            em.getTransaction().commit();
+            //i = new Items();
+            //searchW();
+            terminate = true;
+        } catch (Exception e) {
+            
+        }
+        return terminate;
+    }
+    
+    public boolean canceledit(){
+        searchUsers();
+        return true;
     }
 }

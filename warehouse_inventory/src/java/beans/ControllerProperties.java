@@ -19,7 +19,7 @@ public class ControllerProperties implements Serializable {
 
     int option;
     String name,move;
-    String create,search,title,phcode,phname,phprice;
+    String create,search,title,phcode,phname,phprice,phpassword;
     boolean disabled;
     String visibilityCreate = "inline",visibilityEdit = "none",visibilityUpdate = "none";
     /**
@@ -131,6 +131,14 @@ public class ControllerProperties implements Serializable {
     public void setVisibilityUpdate(String visibilityUpdate) {
         this.visibilityUpdate = visibilityUpdate;
     }
+
+    public String getPhpassword() {
+        return phpassword;
+    }
+
+    public void setPhpassword(String phpassword) {
+        this.phpassword = phpassword;
+    }
     
     
     
@@ -167,6 +175,7 @@ public class ControllerProperties implements Serializable {
         phcode = "Digitar codigo de "+move;
         phname = "Digitar nombre de "+move;
         phprice = "Digitar Precio de "+move;
+        phpassword = "Digitar Contraseña de "+move;
     }
     
      

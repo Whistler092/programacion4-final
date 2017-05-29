@@ -13,7 +13,7 @@
                 <div class="well bs-component">
                     <h:form class="form-horizontal">
                         <center> 
-                            <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.createM(controllerWarehouse.newW())}" > #{controllerProperties.create} </h:commandLink>
+                            <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.createM(controllerUsers.newU())}" > #{controllerProperties.create} </h:commandLink>
                             <h:commandLink class="btn btn-info btn-primary" action="#{controllerProperties.searchM(true)}" > #{controllerProperties.search} </h:commandLink>
                         </center><br></br>
                         <fieldset>
@@ -22,19 +22,27 @@
                                 <div class="col-lg-2 control-label"><h:outputLabel> Nombre </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-8">
-                                    <h:inputText class="form-control" id="name" p:placeholder="#{controllerProperties.phname}" value="#{controllerUsers.u.name}" readonly="#{controllerProperties.disabled}">
+                                    <h:inputText class="form-control" id="name" p:placeholder="#{controllerProperties.phname}" value="#{controllerUsers.u.name}">
                                     </h:inputText>
                                 </div>
                                 <div class="col-lg-2 control-label">
-                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProperties.visibilityEdit};" action="#{controllerWarehouse.searchWarehouse()}"> 
+                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProperties.visibilityEdit};" action="#{controllerUsers.searchUsers()}"> 
                                         <h:graphicImage url="resources/img/search.png" styleClass="searchproduct" />
                                     </h:commandLink>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-2 control-label"><h:outputLabel>Opciones: </h:outputLabel></div>
+                                <div class="col-lg-2 control-label"><h:outputLabel> Contraseña </h:outputLabel></div>
+                                <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-8">
-                                    <h:selectOneMenu value="#{controllerUsers.temput}" class="form-control" >
+                                    <h:inputSecret class="form-control" id="password" p:placeholder="#{controllerProperties.phpassword}" value="#{controllerUsers.u.passwordUser}"  disabled="#{controllerProperties.disabled}">
+                                    </h:inputSecret>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-2 control-label"><h:outputLabel>Tipo de Usuario </h:outputLabel></div>
+                                <div class="col-lg-8">
+                                    <h:selectOneMenu value="#{controllerUsers.temput}" class="form-control">
                                         <f:selectItems value="#{controllerUsers.selectTypeUser}" />
                                     </h:selectOneMenu>
                                 </div>
@@ -51,9 +59,9 @@
                             </div>
                             <center> 
                                 <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.editM()}"  style="display: #{controllerProperties.visibilityEdit};"> Editar </h:commandLink>
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerWarehouse.additem()}" style="display: #{controllerProperties.visibilityCreate};"> #{controllerProperties.create}</h:commandLink>
-                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerProperties.searchM(controllerWarehouse.updateWarehouse())}"  style="display: #{controllerProperties.visibilityUpdate};"> Actualizar</h:commandLink>
-                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProperties.searchM(controllerWarehouse.canceledit())}"  style="display: #{controllerProperties.visibilityUpdate};"> Cancelar </h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerProperties.visibilityCreate};"> #{controllerProperties.create} 9</h:commandLink>
+                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerProperties.searchM(controllerUsers.updateUsers())}"  style="display: #{controllerProperties.visibilityUpdate};"> Actualizar</h:commandLink>
+                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProperties.searchM(controllerUsers.canceledit())}"  style="display: #{controllerProperties.visibilityUpdate};"> Cancelar </h:commandLink>
                             </center>
                         </fieldset>
                     </h:form>
