@@ -26,7 +26,7 @@
                                     </h:inputText>
                                 </div>
                                 <div class="col-lg-2 control-label">
-                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProperties.visibilityEdit};" action="#{controllerUsers.searchUsers()}"> 
+                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProperties.visibilityEdit};" action="#{options.setUrlOption(controllerProperties.moveProperties(controllerUsers.searchUsers()))}"> 
                                         <h:graphicImage url="resources/img/search.png" styleClass="searchproduct" />
                                     </h:commandLink>
                                 </div>
@@ -35,14 +35,13 @@
                                 <div class="col-lg-2 control-label"><h:outputLabel> Contraseña </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-8">
-                                    <h:inputSecret class="form-control" id="password" p:placeholder="#{controllerProperties.phpassword}" value="#{controllerUsers.u.passwordUser}"  disabled="#{controllerProperties.disabled}">
-                                    </h:inputSecret>
+                                    <h:inputSecret class="form-control" id="password" p:placeholder="#{controllerProperties.phpassword}" value="#{controllerUsers.u.passwordUser}" disabled="#{controllerProperties.disabled}"></h:inputSecret>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-2 control-label"><h:outputLabel>Tipo de Usuario </h:outputLabel></div>
                                 <div class="col-lg-8">
-                                    <h:selectOneMenu value="#{controllerUsers.temput}" class="form-control">
+                                    <h:selectOneMenu value="#{controllerUsers.temput}" class="form-control" disabled="#{controllerProperties.disabled}">
                                         <f:selectItems value="#{controllerUsers.selectTypeUser}" />
                                     </h:selectOneMenu>
                                 </div>

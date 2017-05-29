@@ -139,15 +139,19 @@ public class ControllerUsers implements Serializable {
         allu = consuluser.getResultList();
     }
     public String searchUsers(){
+        listUsers();
         String loginusers = "";
-        if(u.getName() != null && u.getPasswordUser() != null){
+        if(u.getName() != null){
             for (Users user : allu) {
-                if(isLogIn && user.getName().trim().equals(u.getName().trim())){
-                    u = user;
-                    temput = 2;
+                if(isLogIn && u.getName() != null && u.getName().toString().equals(user.getName().toString())){
+                    //u = user;
+                    u.setIsActived(user.getIsActived());
+                    u.setPasswordUser(user.getPasswordUser());
+                    u.setIdusersType(user.getIdusersType());
+                    temput = u.getIdusersType().getIdusersType();
                     loginusers = "Users";
                 }
-                else if(user.getName().trim().equals(u.getName().trim()) && user.getPasswordUser().equals(u.getPasswordUser())){
+                else if(user.getName().trim().equals(u.getName().trim()) && u.getPasswordUser() != null && user.getPasswordUser().equals(u.getPasswordUser())){
                     ulogin = user;
                     isLogIn = true;
                     loginusers = "Login";
@@ -176,6 +180,7 @@ public class ControllerUsers implements Serializable {
         em.persist(u);
         em.getTransaction().commit();
         u = new Users();
+        listUsers();
     }
     /*public void searchUsers(){
         EntityManager em = u.getEntityManager();
@@ -190,6 +195,21 @@ public class ControllerUsers implements Serializable {
     }*/
     public boolean updateUsers(){
         boolean terminate = false;
+        
+        if("".equals(u.getPasswordUser())){
+            for (Users user : allu) {
+                if(isLogIn && u.getName()!= null && u.getName().toString().equals(user.getName().toString())){
+                    u.setPasswordUser(user.getPasswordUser());
+                    u.setUsersId(user.getUsersId());
+                }
+            }
+        }
+        
+        for(int i = 0; i < allut.size(); i++){
+            if(allut.get(i).getIdusersType() == temput){
+                u.setIdusersType(allut.get(i));
+            }
+        }
         try {
             //obtener el entitymanager
             EntityManager em = u.getEntityManager();
@@ -205,6 +225,7 @@ public class ControllerUsers implements Serializable {
         } catch (Exception e) {
             
         }
+        listUsers();
         return terminate;
     }
     

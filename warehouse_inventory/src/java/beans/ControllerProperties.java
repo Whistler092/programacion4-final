@@ -171,11 +171,13 @@ public class ControllerProperties implements Serializable {
         name = move;
         create = "Crear "+move;
         search = "Buscar "+move;
-        title = create;
         phcode = "Digitar codigo de "+move;
         phname = "Digitar nombre de "+move;
         phprice = "Digitar Precio de "+move;
         phpassword = "Digitar Contraseña de "+move;
+        if(title != null && !title.equals(search)){
+            title = create;
+        }
     }
     
      
