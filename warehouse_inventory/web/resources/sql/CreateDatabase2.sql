@@ -72,7 +72,7 @@ CREATE INDEX `fk_users_users_type_idx` ON `inventory`.`users` (`idusers_type` AS
 -- Table `inventory`.`warehouses`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `inventory`.`warehouses` (
-  `warehouses_Id` INT NOT NULL,
+  `warehouses_Id` INT NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(45) NULL,
   `name` VARCHAR(45) NULL,
   `isActived` TINYINT(1) NULL DEFAULT 0,
@@ -84,7 +84,7 @@ ENGINE = InnoDB;
 -- Table `inventory`.`type_doc`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `inventory`.`type_doc` (
-  `type_doc_Id` INT NOT NULL,
+  `type_doc_Id` INT NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(4) NULL,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`type_doc_Id`))
@@ -114,7 +114,7 @@ CREATE INDEX `fk_document_type_doc1_idx` ON `inventory`.`document` (`type_doc_Id
 -- Table `inventory`.`document_detail`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `inventory`.`document_detail` (
-  `document_datail_Id` INT NOT NULL,
+  `document_datail_Id` INT NOT NULL AUTO_INCREMENT,
   `document_id` INT NOT NULL,
   `Quantity` INT NOT NULL,
   `warehouses_Id` INT NOT NULL,
@@ -159,5 +159,9 @@ INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`, `isAct
 INSERT INTO `inventory`.`users` (`name`, `password_user`, `idusers_type`, `isActived`) VALUES ('Dz', '123456', 2,1);
 
 INSERT INTO `inventory`.`items` (`code`, `name`, `lot`, `color`, `size`, `price`, `isActived`) VALUES ('1', 'Portatil', '0', '0', '0', '1500000', '1');
+
+INSERT INTO `inventory`.`type_doc` (`code`, `name`) VALUES ('1', 'Ingreso');
+INSERT INTO `inventory`.`type_doc` (`code`, `name`) VALUES ('2', 'Salida');
+
 
 

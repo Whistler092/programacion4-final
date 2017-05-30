@@ -24,6 +24,7 @@ public class ControllerProduct implements Serializable {
     List<Items> listitems;
     boolean disabled;
     String visibilityCreate = "inline",visibilityEdit = "none",visibilityUpdate = "none";
+    String name = "Product";
     String titulo = "Crear Producto";
     /**
      * Creates a new instance of controllerProduct
@@ -86,6 +87,16 @@ public class ControllerProduct implements Serializable {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
     
     public void crearP(){
         titulo = "Crear Producto";

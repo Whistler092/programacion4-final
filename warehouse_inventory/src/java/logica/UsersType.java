@@ -116,7 +116,7 @@ public class UsersType implements Serializable {
 
     @Override
     public String toString() {
-        return "logicaa.UsersType[ idusersType=" + idusersType + " ]";
+        return "logica.UsersType[ idusersType=" + idusersType + " ]";
     }
     
     public EntityManager getEntityManager(){

@@ -2,10 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Create</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
         <div class="col-lg-4"></div>
@@ -18,8 +18,9 @@
                         </center><br></br>
                         <fieldset>
                             <legend><h:outputLabel value="#{controllerProperties.title}"></h:outputLabel></legend>
+                            
                             <div class="form-group">
-                                <div class="col-lg-2 control-label"><h:outputLabel> Nombre </h:outputLabel></div>
+                                <div class="col-lg-2 control-label"><h:outputLabel> Consecutivo </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-8">
                                     <h:inputText class="form-control" id="name" p:placeholder="#{controllerProperties.phname}" value="#{controllerUsers.u.name}">
@@ -29,6 +30,14 @@
                                     <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProperties.visibilityEdit};" action="#{options.setUrlOption(controllerProperties.moveProperties(controllerUsers.searchUsers()))}"> 
                                         <h:graphicImage url="resources/img/search.png" styleClass="searchproduct" />
                                     </h:commandLink>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-2 control-label"><h:outputLabel>Tipo de Documento </h:outputLabel></div>
+                                <div class="col-lg-8">
+                                    <h:selectOneMenu value="#{controllerUsers.temput}" class="form-control" disabled="#{controllerProperties.disabled}">
+                                        <f:selectItems value="#{controllerDocument.selectTypeDoc}" />
+                                    </h:selectOneMenu>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -58,7 +67,7 @@
                             </div>
                             <center> 
                                 <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.editM()}"  style="display: #{controllerProperties.visibilityEdit};"> Editar </h:commandLink>
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerProperties.visibilityCreate};"> #{controllerProperties.create}</h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerProperties.visibilityCreate};"> #{controllerProperties.create} 9</h:commandLink>
                                 <h:commandLink class="btn btn-success btn-primary" action="#{controllerProperties.searchM(controllerUsers.updateUsers())}"  style="display: #{controllerProperties.visibilityUpdate};"> Actualizar</h:commandLink>
                                 <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProperties.searchM(controllerUsers.canceledit())}"  style="display: #{controllerProperties.visibilityUpdate};"> Cancelar </h:commandLink>
                             </center>
@@ -66,7 +75,6 @@
                     </h:form>
                     </div>
                 </div>
-        
     </h:body>
 </html>
 

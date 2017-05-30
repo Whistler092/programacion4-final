@@ -46,6 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Items.findByIsActived", query = "SELECT i FROM Items i WHERE i.isActived = :isActived")})
 public class Items implements Serializable {
 
+    @Column(name = "isActived")
+    private Boolean isActived;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,10 +76,6 @@ public class Items implements Serializable {
     //@NotNull
     @Column(name = "price")
     private BigDecimal price;
-    @Basic(optional = true)
-    //@NotNull
-    @Column(name = "isActived")
-    private boolean isActived;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "items")
     private Collection<DocumentDetail> documentDetailCollection;
 
@@ -151,13 +150,6 @@ public class Items implements Serializable {
         this.price = price;
     }
 
-    public boolean getIsActived() {
-        return isActived;
-    }
-
-    public void setIsActived(boolean isActived) {
-        this.isActived = isActived;
-    }
 
     @XmlTransient
     public Collection<DocumentDetail> getDocumentDetailCollection() {
@@ -190,11 +182,19 @@ public class Items implements Serializable {
 
     @Override
     public String toString() {
-        return "logicaa.Items[ itemId=" + itemId + " ]";
+        return "logica.Items[ itemId=" + itemId + " ]";
     }
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_inventoryPU");
         EntityManager em = emf.createEntityManager();
         return em;
+    }
+
+    public Boolean getIsActived() {
+        return isActived;
+    }
+
+    public void setIsActived(Boolean isActived) {
+        this.isActived = isActived;
     }
 }
