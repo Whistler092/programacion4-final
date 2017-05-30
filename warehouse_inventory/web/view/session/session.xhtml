@@ -7,26 +7,22 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <h:form class="form-horizontal">
-                    <fieldset>
-                        <center><h:graphicImage url="resources/img/login.png" /></center>
-                        <br></br>
-                        <div class="form-group">
-                            <h:inputText class="form-control" id="username" p:placeholder="Nombre de Usuario" value="#{controllerUsers.u.name}"></h:inputText>
-                        </div>
-                        <div class="form-group">
-                            <h:inputSecret class="form-control" id="password" p:placeholder="Contaseña de Usuario" value="#{controllerUsers.u.passwordUser}"></h:inputSecret>
-                        </div>
-                        <center>
-                            <h:commandButton class="btn btn-primary btn-primary" value="Ingresar" action="#{options.setUrlOption(controllerProperties.moveProperties(controllerUsers.searchUsers()))}">  </h:commandButton></center>
-                    </fieldset>
-                </h:form>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
+        <!--<div class="row">
+            <div class="col-md-4 login_center">-->
+        <h:form class="form-horizontal login_center">
+            <fieldset>
+                <center><h:graphicImage url="resources/img/login.png" /></center>
+                <br></br>
+                <div class="form-group">
+                    <h:inputText class="form-control" id="username" p:placeholder="Nombre de Usuario" value="#{controllerUsers.u.name}"></h:inputText>
+                </div>
+                <div class="form-group">
+                    <h:inputSecret class="form-control" id="password" p:placeholder="Contaseña de Usuario" value="#{controllerUsers.u.passwordUser}"></h:inputSecret>
+                </div>
+                <center>
+                    <h:commandButton class="btn btn-primary btn-primary" value="Ingresar" action="#{options.setUrlOption(controllerProperties.moveProperties(controllerUsers.searchUsers()))}">  </h:commandButton></center>
+            </fieldset>
+        </h:form>
     </h:body>
 </html>
 

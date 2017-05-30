@@ -56,6 +56,9 @@ public class Options implements Serializable {
             case 1 :
                 url = "view/session/session.xhtml";
                 break;
+            case 2 :
+                url = "view/main/main.xhtml";
+                break;
             case 3 :
                 url = "view/product/addProduct.xhtml";
                 break;

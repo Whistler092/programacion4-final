@@ -5,17 +5,57 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
-        <link href="//bootswatch.com/cyborg/bootstrap.css" rel="stylesheet"></link>
+        <link href="//bootswatch.com/paper/bootstrap.css" rel="stylesheet"></link>
         <!--link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"></link-->
         <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
     </h:head>
     <h:body>
         <h:form>
-            <u><h:outputLabel value="#{controllerUsers.ulogin.name}"></h:outputLabel> </u>
-        </h:form>
-            <div >
-                <ui:include src="#{options.url}"/>
+            <u> </u>
+            <div style="display: #{(controllerUsers.isLogIn) ? 'inline' : 'none'} ">
+                <nav  class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Inventario</a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li >
+                                    <!--<a href="#">Link <span class="sr-only">(current)</span></a>-->
+                                    <h:commandLink action="#{options.setUrlOption(controllerProperties.moveProperties('Users'))}"> Usuarios</h:commandLink> 
+                                </li>
+                                <li >
+                                    <!--<a href="#">Link <span class="sr-only">(current)</span></a>-->
+                                    <h:commandLink action="#{options.setUrlOption(controllerProperties.moveProperties('Users'))}"> Articulos</h:commandLink> 
+                                </li>
+                                 <li >
+                                    <!--<a href="#">Link <span class="sr-only">(current)</span></a>-->
+                                    <h:commandLink action="#{options.setUrlOption(controllerProperties.moveProperties('Users'))}"> Bodegas</h:commandLink> 
+                                </li>
+                                <li >
+                                    <!--<a href="#">Link <span class="sr-only">(current)</span></a>-->
+                                    <h:commandLink action="#{options.setUrlOption(controllerProperties.moveProperties('Users'))}"> Reportes</h:commandLink> 
+                                </li>
+                            </ul>
+                            
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">usuario: <h:outputLabel value="#{controllerUsers.ulogin.name}"></h:outputLabel></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
+        </h:form>
+        <div >
+            <ui:include src="#{options.url}"/>
+        </div>
     </h:body>
 </html>
 

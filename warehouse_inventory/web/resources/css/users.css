@@ -14,6 +14,7 @@ and open the template in the editor.
     margin-left: 40%;*/
 }
 
+
 .containerlogin_center{
     margin-left: 35%;
     text-align: center;
@@ -22,4 +23,11 @@ and open the template in the editor.
 #containerlogin img{
     width: 130px;
     text-align: center;
+}
+
+.login_center{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+
 }

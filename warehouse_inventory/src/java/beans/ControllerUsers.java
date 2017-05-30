@@ -154,7 +154,7 @@ public class ControllerUsers implements Serializable {
                 else if(user.getName().trim().equals(u.getName().trim()) && u.getPasswordUser() != null && user.getPasswordUser().equals(u.getPasswordUser())){
                     ulogin = user;
                     isLogIn = true;
-                    loginusers = "Login";
+                    loginusers = "Main";
                     u = new Users();
                     break;
                 }

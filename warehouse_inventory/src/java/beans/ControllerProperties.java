@@ -161,6 +161,10 @@ public class ControllerProperties implements Serializable {
                 moveP("Usuario");
                 opt = 5;
                 break;
+            case "Main":
+                moveP("Main");
+                opt = 2;
+                break;
             default :
                 break;
         }
