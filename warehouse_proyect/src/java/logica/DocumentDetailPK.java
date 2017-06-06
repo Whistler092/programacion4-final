@@ -9,6 +9,9 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -114,4 +117,9 @@ public class DocumentDetailPK implements Serializable {
         return "logica.DocumentDetailPK[ documentdatailId=" + documentdatailId + ", documentId=" + documentId + ", warehousesId=" + warehousesId + ", itemId=" + itemId + " ]";
     }
     
+    public EntityManager getEntityManager(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
+        EntityManager em = emf.createEntityManager();
+        return em;
+    }
 }

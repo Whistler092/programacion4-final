@@ -29,8 +29,9 @@ public class ControllerUsers implements Serializable {
     int temput;
     List<UsersType> allut;
     List<Users> allu;
-    boolean isLogIn;
+    
     SelectItem[] selectTypeUser;
+    boolean isLogIn;
     String name = "Users";
     /**
      * Creates a new instance of controllerUsers

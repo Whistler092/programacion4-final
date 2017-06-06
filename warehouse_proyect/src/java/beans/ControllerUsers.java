@@ -5,9 +5,12 @@
  */
 package beans;
 
+import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.model.SelectItem;
 import logica.Users;
+import logica.UsersType;
 
 /**
  *
@@ -19,6 +22,14 @@ public class ControllerUsers {
 
     boolean isLogIn;
     Users ulogin;
+    Users u;
+
+    UsersType ut = new UsersType();
+    int temput;
+    List<UsersType> allut;
+    List<Users> allu;
+
+    SelectItem[] selectTypeUser;
 
     /**
      * Creates a new instance of ControllerUsers
@@ -26,13 +37,13 @@ public class ControllerUsers {
     public ControllerUsers() {
         isLogIn = false;
         ulogin = new Users();
-        
+
     }
-    
-    public String loguinUser(){
+
+    public String loguinUser() {
         setIsLogIn(true);
         return "views/users.xhtml";
-    } 
+    }
 
     public boolean isIsLogIn() {
         return isLogIn;
@@ -50,5 +61,52 @@ public class ControllerUsers {
         this.ulogin = ulogin;
     }
 
-    
+    public Users getU() {
+        return u;
+    }
+
+    public void setU(Users u) {
+        this.u = u;
+    }
+
+    public UsersType getUt() {
+        return ut;
+    }
+
+    public void setUt(UsersType ut) {
+        this.ut = ut;
+    }
+
+    public int getTemput() {
+        return temput;
+    }
+
+    public void setTemput(int temput) {
+        this.temput = temput;
+    }
+
+    public List<UsersType> getAllut() {
+        return allut;
+    }
+
+    public void setAllut(List<UsersType> allut) {
+        this.allut = allut;
+    }
+
+    public List<Users> getAllu() {
+        return allu;
+    }
+
+    public void setAllu(List<Users> allu) {
+        this.allu = allu;
+    }
+
+    public SelectItem[] getSelectTypeUser() {
+        return selectTypeUser;
+    }
+
+    public void setSelectTypeUser(SelectItem[] selectTypeUser) {
+        this.selectTypeUser = selectTypeUser;
+    }
+
 }

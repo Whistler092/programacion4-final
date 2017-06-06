@@ -10,10 +10,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -132,4 +135,10 @@ public class DocumentDetail implements Serializable {
         return "logica.DocumentDetail[ documentDetailPK=" + documentDetailPK + " ]";
     }
     
+    
+    public EntityManager getEntityManager(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
+        EntityManager em = emf.createEntityManager();
+        return em;
+    }
 }

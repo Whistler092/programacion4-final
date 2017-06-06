@@ -11,10 +11,13 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -115,4 +118,9 @@ public class TypeDoc implements Serializable {
         return "logica.TypeDoc[ typedocId=" + typedocId + " ]";
     }
     
+    public EntityManager getEntityManager(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
+        EntityManager em = emf.createEntityManager();
+        return em;
+    }
 }

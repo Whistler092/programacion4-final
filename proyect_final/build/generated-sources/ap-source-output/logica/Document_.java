@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import logica.DocumentDetail;
 import logica.TypeDoc;
 
-@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2017-06-06T14:15:42")
+@Generated(value="EclipseLink-2.6.1.v20150605-rNA", date="2017-06-06T17:50:45")
 @StaticMetamodel(Document.class)
 public class Document_ { 
 
