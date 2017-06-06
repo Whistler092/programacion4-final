@@ -6,7 +6,10 @@
     <body>
 
         <ui:composition template="./../templates/main.xhtml">
-
+            <ui:define name="top">
+                <ui:include src="./sharedViews/options.xhtml" />
+                
+            </ui:define>
             <ui:define name="content">
                 products
             </ui:define>

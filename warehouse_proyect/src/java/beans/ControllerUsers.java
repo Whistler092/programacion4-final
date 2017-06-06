@@ -30,7 +30,7 @@ public class ControllerUsers {
     }
     
     public String loguinUser(){
-        isLogIn = true;
+        setIsLogIn(true);
         return "views/users.xhtml";
     } 
 

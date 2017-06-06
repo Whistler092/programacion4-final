@@ -6,6 +6,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
         <h:outputStylesheet name="/css/default.css"/>
         <h:outputStylesheet name="/css/cssLayout.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,22 +18,17 @@
 
         <div id="top">
             <ui:insert name="top">
-                <ui:insert name="left">
-                    <ui:include src="../views/sharedViews/options.xhtml" />
-
-                </ui:insert>
+                <!--<ui:include src="../views/sharedViews/options.xhtml" />-->
             </ui:insert>
         </div>
         <div>
-            <div id="left">
-                Left
-            </div>
+            
             <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
+                <ui:insert name="content"></ui:insert>
             </div>
         </div>
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom"></ui:insert>
         </div>
 
     </h:body>
