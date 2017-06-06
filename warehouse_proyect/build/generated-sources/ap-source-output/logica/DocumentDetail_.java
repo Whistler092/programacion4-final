@@ -8,7 +8,7 @@ import logica.DocumentDetailPK;
 import logica.Items;
 import logica.Warehouses;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-06T15:04:34")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-06T15:07:19")
 @StaticMetamodel(DocumentDetail.class)
 public class DocumentDetail_ { 
 
