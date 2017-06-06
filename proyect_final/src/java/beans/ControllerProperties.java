@@ -147,7 +147,7 @@ public class ControllerProperties implements Serializable {
         switch (move){
             case "Login":
                 moveP("Usuario");
-                opt = "views/users/users.xhtml";
+                opt = "../users/users.xhtml";
                 break;
             case "Product":
                 moveP("Producto");
@@ -163,7 +163,7 @@ public class ControllerProperties implements Serializable {
                 break;
             case "Main":
                 moveP("Main");
-                opt = "views/users/users.xhtml";
+                opt = "../users/users.xhtml";
                 break;
             default :
                 break;
