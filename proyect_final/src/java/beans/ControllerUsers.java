@@ -149,7 +149,7 @@ public class ControllerUsers implements Serializable {
                     u.setPasswordUser(user.getPasswordUser());
                     u.setIdusersType(user.getIdusersType());
                     temput = u.getIdusersType().getIdusersType();
-                    loginusers = "Users";
+                    loginusers = "views/users/users.xhtml";
                 }
                 else if(user.getName().trim().equals(u.getName().trim()) && u.getPasswordUser() != null && user.getPasswordUser().equals(u.getPasswordUser())){
                     ulogin = user;
