@@ -13,24 +13,26 @@
             </ui:define>
             <ui:define name="content">
 
+        <div class="col-lg-4"></div>
+            <div class="col-lg-4">
                 <div class="well bs-component">
                     <h:form class="form-horizontal">
                         <center> 
-                            <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.createM(controllerWarehouse.newW())}" > Crear Bodega #{controllerProperties.create} </h:commandLink>
-                            <h:commandLink class="btn btn-info btn-primary" action="#{controllerProperties.searchM(true)}" > Buscar Bodega #{controllerProperties.search} </h:commandLink>
+                            <h:commandLink class="btn btn-primary btn-primary" action="#{controllerWarehouse.createW()}" > Crear Bodega </h:commandLink>
+                            <h:commandLink class="btn btn-info btn-primary" action="#{controllerWarehouse.searchW()}" > Buscar Bodega </h:commandLink>
                         </center><br></br>
                         <fieldset>
-                            <legend><h:outputLabel value="Crear Bodegas#{controllerProperties.title}"></h:outputLabel></legend>
+                            <legend><h:outputLabel value="#{controllerWarehouse.title}"></h:outputLabel></legend>
                             
                             <div class="form-group">
                                 <div class="col-lg-2 control-label"><h:outputLabel> Codigo </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-8">
-                                    <h:inputText class="form-control" id="codigo" p:placeholder="#{controllerProperties.phcode}" value="#{controllerWarehouse.w.code}" >
+                                    <h:inputText class="form-control" id="codigo" p:placeholder="Digitar Codigo de Bodega" value="#{controllerWarehouse.w.code}" >
                                     </h:inputText>
                                 </div>
                                 <div class="col-lg-2 control-label">
-                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProperties.visibilityEdit};" action="#{controllerWarehouse.searchWarehouse()}"> 
+                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerWarehouse.visibilityEdit};" action="#{controllerWarehouse.searchWarehouse()}"> 
                                         <h:graphicImage url="../../resources/img/search.png" styleClass="searchproduct" />
                                     </h:commandLink>
                                 </div>
@@ -39,7 +41,7 @@
                                 <div class="col-lg-2 control-label"><h:outputLabel> Nombre </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-8">
-                                    <h:inputText class="form-control" id="name" p:placeholder="#{controllerProperties.phname}" value="#{controllerWarehouse.w.name}" readonly="#{controllerProperties.disabled}">
+                                    <h:inputText class="form-control" id="name" p:placeholder="Digitar Nombre de Bodega" value="#{controllerWarehouse.w.name}" readonly="#{controllerWarehouse.disabled}">
                                     </h:inputText>
                                 </div>
                             </div>
@@ -48,22 +50,22 @@
                                 <div class="col-lg-8">
                                     <div class="checkbox">
                                         <label>
-                                            <h:selectBooleanCheckbox value="#{controllerWarehouse.w.isActived}" disabled="#{controllerProperties.disabled}"  ></h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{controllerWarehouse.w.isActived}" disabled="#{controllerWarehouse.disabled}"  ></h:selectBooleanCheckbox>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <center> 
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.editM()}"  style="display: #{controllerProperties.visibilityEdit};"> Editar </h:commandLink>
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerWarehouse.additem()}" style="display: #{controllerProperties.visibilityCreate};"> #{controllerProperties.create}</h:commandLink>
-                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerProperties.searchM(controllerWarehouse.updateWarehouse())}"  style="display: #{controllerProperties.visibilityUpdate};"> Actualizar</h:commandLink>
-                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProperties.searchM(controllerWarehouse.canceledit())}"  style="display: #{controllerProperties.visibilityUpdate};"> Cancelar </h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerWarehouse.editW()}"  style="display: #{controllerWarehouse.visibilityEdit};"> Editar </h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerWarehouse.additem()}" style="display: #{controllerWarehouse.visibilityCreate};"> Crear Bodega</h:commandLink>
+                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerWarehouse.updateWarehouse()}"  style="display: #{controllerWarehouse.visibilityUpdate};"> Actualizar</h:commandLink>
+                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerWarehouse.canceledit()}"  style="display: #{controllerWarehouse.visibilityUpdate};"> Cancelar </h:commandLink>
                             </center>
 
                         </fieldset>
                     </h:form>
                 </div>
-
+            </div>
             </ui:define>
 
         </ui:composition>

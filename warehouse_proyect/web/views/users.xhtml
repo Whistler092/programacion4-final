@@ -7,28 +7,32 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
+        
 
         <ui:composition template="./../templates/main.xhtml">
             <ui:define name="top">
                 <ui:include src="./sharedViews/options.xhtml" />
             </ui:define>
             <ui:define name="content">
+                
+        <div class="col-lg-4"></div>
+            <div class="col-lg-4">
                 <div class="well bs-component">
                     <h:form class="form-horizontal">
                         <center> 
-                            <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.createM(controllerUsers.newU())}" > Crear Usuario #{controllerProperties.create} </h:commandLink>
-                            <h:commandLink class="btn btn-info btn-primary" action="#{controllerProperties.searchM(true)}" > Buscar Usuario #{controllerProperties.search} </h:commandLink>
+                            <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.createU()}" > Crear Usuario </h:commandLink>
+                            <h:commandLink class="btn btn-info btn-primary" action="#{controllerUsers.searchU()}" > Buscar Usuario </h:commandLink>
                         </center><br></br>
                         <fieldset>
-                            <legend><h:outputLabel value="Crear Usuario#{controllerProperties.title}"></h:outputLabel></legend>
+                            <legend><h:outputLabel value="#{controllerUsers.title}"></h:outputLabel></legend>
                             <div class="form-group">
                                 <div class="col-lg-2 control-label"><h:outputLabel> Nombre </h:outputLabel></div>
                                 <div class="col-lg-8">
-                                    <h:inputText class="form-control" id="name" p:placeholder="#{controllerProperties.phname}" value="#{controllerUsers.u.name}">
+                                    <h:inputText class="form-control" id="name" p:placeholder="Digitar Usuario" value="#{controllerUsers.u.name}">
                                     </h:inputText>
                                 </div>
                                 <div class="col-lg-2 control-label">
-                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerProperties.visibilityEdit};" action="#{controllerProperties.moveProperties(controllerUsers.searchUsers())}"> 
+                                    <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerUsers.visibilityEdit};" action="#{controllerUsers.searchUsers()}"> 
                                         <h:graphicImage url="../../resources/img/search.png" styleClass="searchproduct" />
                                     </h:commandLink>
                                 </div>
@@ -37,13 +41,13 @@
                                 <div class="col-lg-2 control-label"><h:outputLabel> Contraseña </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-8">
-                                    <h:inputSecret class="form-control" id="password" p:placeholder="#{controllerProperties.phpassword}" value="#{controllerUsers.u.passwordUser}" disabled="#{controllerProperties.disabled}"></h:inputSecret>
+                                    <h:inputSecret class="form-control" id="password" p:placeholder="Digitar Contraseña" value="#{controllerUsers.u.passwordUser}" disabled="#{controllerUsers.disabled}"></h:inputSecret>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-2 control-label"><h:outputLabel>Tipo de Usuario </h:outputLabel></div>
                                 <div class="col-lg-8">
-                                    <h:selectOneMenu value="#{controllerUsers.temput}" class="form-control" disabled="#{controllerProperties.disabled}">
+                                    <h:selectOneMenu value="#{controllerUsers.temput}" class="form-control" disabled="#{controllerUsers.disabled}">
                                         <f:selectItems value="#{controllerUsers.selectTypeUser}" />
                                     </h:selectOneMenu>
                                 </div>
@@ -53,20 +57,21 @@
                                 <div class="col-lg-8">
                                     <div class="checkbox">
                                         <label>
-                                            <h:selectBooleanCheckbox value="#{controllerUsers.u.isActived}" disabled="#{controllerProperties.disabled}"  ></h:selectBooleanCheckbox>
+                                            <h:selectBooleanCheckbox value="#{controllerUsers.u.isActived}" disabled="#{controllerUsers.disabled}"  ></h:selectBooleanCheckbox>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <center> 
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.editM()}"  style="display: #{controllerProperties.visibilityEdit};"> Editar </h:commandLink>
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerProperties.visibilityCreate};"> #{controllerProperties.create}</h:commandLink>
-                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerProperties.searchM(controllerUsers.updateUsers())}"  style="display: #{controllerProperties.visibilityUpdate};"> Actualizar</h:commandLink>
-                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProperties.searchM(controllerUsers.canceledit())}"  style="display: #{controllerProperties.visibilityUpdate};"> Cancelar </h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.editU()}"  style="display: #{controllerUsers.visibilityEdit};"> Editar </h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerUsers.visibilityCreate};"> Crear Usuario</h:commandLink>
+                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerUsers.updateUsers()}"  style="display: #{controllerUsers.visibilityUpdate};"> Actualizar</h:commandLink>
+                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerUsers.canceledit()}"  style="display: #{controllerUsers.visibilityUpdate};"> Cancelar </h:commandLink>
                             </center>
                         </fieldset>
                     </h:form>
                 </div>
+            </div>
             </ui:define>
 
         </ui:composition>

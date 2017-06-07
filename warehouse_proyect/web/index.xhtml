@@ -18,14 +18,14 @@
                     <center><h:graphicImage url="resources/img/login.png" /></center>
                     <br></br>
                     <div class="form-group">
-                        <h:inputText class="form-control" id="username" p:placeholder="Nombre de Usuario" value="#{controllerUsers.ulogin.name}"></h:inputText>
+                        <h:inputText class="form-control" id="username" p:placeholder="Nombre de Usuario" value="#{controllerUsers.u.name}"></h:inputText>
                     </div>
                     <div class="form-group">
-                        <h:inputSecret class="form-control" id="password" p:placeholder="Contaseña de Usuario" value="#{controllerUsers.ulogin.passwordUser}"></h:inputSecret>
+                        <h:inputSecret class="form-control" id="password" p:placeholder="Contaseña de Usuario" value="#{controllerUsers.u.passwordUser}"></h:inputSecret>
                     </div>
                     <center>
-                        <h:commandButton class="btn btn-primary btn-primary" value="Ingresar" action="#{controllerUsers.loguinUser()}"  > 
-                            <f:ajax render=":menu_option" />
+                        <h:commandButton class="btn btn-primary btn-primary" value="Ingresar" action="#{controllerUsers.searchUsers()}"  > 
+                            
                         </h:commandButton></center>
                 </fieldset>
             </h:form>
