@@ -53,13 +53,13 @@ public class Items implements Serializable {
     @Column(name = "itemId")
     private Integer itemId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "code")
     private String code;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    //@NotNull
+    //@Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
     @Column(name = "lot")
@@ -70,7 +70,7 @@ public class Items implements Serializable {
     private Integer size;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "price")
     private BigDecimal price;
     @Column(name = "isActived")
