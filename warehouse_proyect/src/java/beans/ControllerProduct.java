@@ -96,8 +96,6 @@ public class ControllerProduct implements Serializable {
         this.name = name;
     }
     
-    
-    
     public void crearP(){
         titulo = "Crear Producto";
         disabled = false;
