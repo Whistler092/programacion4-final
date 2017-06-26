@@ -13,8 +13,8 @@
                 <ui:include src="./sharedViews/options.xhtml" />
             </ui:define>
             <ui:define name="content">
-                <div class="col-lg-4"></div>
-            <div class="col-lg-4">
+                <div class="col-lg-3"></div>
+            <div class="col-lg-6">
                 <div class="well bs-component">
                     <h:form class="form-horizontal">
                         <center> 
@@ -27,9 +27,15 @@
                             <div class="form-group">
                                 <div class="col-lg-2 control-label"><h:outputLabel> Consecutivo </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
-                                <div class="col-lg-8">
-                                    <h:inputText class="form-control" id="name" p:placeholder="Digitar Consecutivo" value="#{controllerDocument.d.consecutive}"  disabled="#{controllerDocument.concecutive}">
+                                <div class="col-lg-3">
+                                    <h:inputText class="form-control" id="name" p:placeholder="Digitar Consecutivo" value="#{controllerDocument.d.consecutive}"  disabled="#{controllerDocument.consecutive}">
                                     </h:inputText>
+                                </div>
+                                <div class="col-lg-2 control-label"><h:outputLabel>Tipo de Documento </h:outputLabel></div>
+                                <div class="col-lg-3">
+                                    <h:selectOneMenu value="#{controllerDocument.temptd}" class="form-control" disabled="#{controllerDocument.disabled}">
+                                        <f:selectItems value="#{controllerDocument.selectTypeDoc}" />
+                                    </h:selectOneMenu>
                                 </div>
                                 <div class="col-lg-2 control-label">
                                     <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerDocument.visibilityEdit};" action="#{controllerDocument.searchDocument()}"> 
@@ -37,57 +43,59 @@
                                     </h:commandLink>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-lg-2 control-label"><h:outputLabel>Tipo de Documento </h:outputLabel></div>
-                                <div class="col-lg-8">
-                                    <h:selectOneMenu value="#{controllerDocument.temptd}" class="form-control" disabled="#{controllerDocument.disabled}">
-                                        <f:selectItems value="#{controllerDocument.selectTypeDoc}" />
-                                    </h:selectOneMenu>
-                                </div>
-                            </div>
                             
                             <div class="form-group">
-                                <div class="col-lg-11">
+                                <div class="col-lg-10">
                                     <legend><h:outputLabel value="Detalles"></h:outputLabel></legend>
                                 </div>
                                 <div class="col-lg-10">
-                                    <h:dataTable value="#{controllerDocument.alldd}" var="dd" class="table table-striped table-hover ">
-
+                                    <h:dataTable value="#{controllerDocument.alldd}" var="ddd" class="table table-striped table-hover ">
                                     <h:column >
                                         <f:facet name="header">Producto</f:facet>
-                                        <h:selectOneMenu value="#{controllerDocument.temptd}" class="form-control" disabled="#{controllerDocument.disabled}">
+                                        <h:selectOneMenu value="#{ddd.tempi}" class="form-control" style="width: 150px;">
                                             <f:selectItems value="#{controllerDocument.selectTypeItems}" />
                                         </h:selectOneMenu>
                                     </h:column>
                                     <h:column >
                                         <f:facet name="header">Bodega</f:facet>
-                                        <h:selectOneMenu value="#{controllerDocument.temptd}" class="form-control" disabled="#{controllerDocument.disabled}">
+                                        <h:selectOneMenu value="#{ddd.tempw}" class="form-control"  style="width: 150px;">
                                             <f:selectItems value="#{controllerDocument.selectTypeWarehouse}" />
                                         </h:selectOneMenu>
                                     </h:column>
                                     <h:column >
                                         <f:facet name="header">Cantidad</f:facet>
-                                        <h:outputText  value="#{dd.quantity}">
-                                        </h:outputText>
+                                        <div class="col-lg-8">
+                                            <h:inputText class="form-control" id="name" p:placeholder="Digitar Cantidad" value="#{ddd.quantity}" >
+                                                <f:ajax event="blur" render="textboxname2" listener="#{controllerDocument.calculatePST(ddd.documentdatailId)}"/>                                            
+                                            </h:inputText>
+                                        </div>
                                     </h:column>
-                                    <h:column >
+                                    <h:column>
                                         <f:facet name="header">Precio Total</f:facet>
-                                        <h:outputText  value="#{dd.quantity*dd.items.price}">
-                                        </h:outputText>
+                                        <h:outputText  value="#{ddd.price}"></h:outputText>
                                     </h:column>
                                     <h:column >
-                                        <f:facet name="header">Accion</f:facet>
-                                        <center><h:commandLink class="btn btn-danger btn-xs" action="#{controllerDocument.addDetails()}" > - </h:commandLink></center> 
+                                        <f:facet name="header"><center>Accion</center></f:facet>
+                                        <center><h:commandLink class="btn btn-danger btn-xs" action="#{controllerDocument.deleteDetails(ddd)}" > - </h:commandLink></center> 
                                     </h:column>
                                 </h:dataTable>
                                 </div>
-                                <div class="col-lg-2 control-label">
+                                <div class="col-lg-1 control-label">
                                     <h:commandLink class="btn btn-success btn-xs" action="#{controllerDocument.addDetails()}" > + </h:commandLink>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-lg-2 control-label"><h:outputLabel> Total </h:outputLabel></div>
+                                <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
+                                <div class="col-lg-3">
+                                    <h:inputText class="form-control" id="total" value="#{controllerDocument.total}"  disabled="false">
+                                    </h:inputText>
                                 </div>
                             </div>
                             <center> 
                                 <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.editM()}"  style="display: #{controllerProperties.visibilityEdit};"> Editar </h:commandLink>
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerProperties.visibilityCreate};"> #{controllerProperties.create} 9</h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerProperties.visibilityCreate};"> Crear Documento</h:commandLink>
                                 <h:commandLink class="btn btn-success btn-primary" action="#{controllerProperties.searchM(controllerUsers.updateUsers())}"  style="display: #{controllerProperties.visibilityUpdate};"> Actualizar</h:commandLink>
                                 <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProperties.searchM(controllerUsers.canceledit())}"  style="display: #{controllerProperties.visibilityUpdate};"> Cancelar </h:commandLink>
                             </center>

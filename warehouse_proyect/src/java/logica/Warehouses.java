@@ -21,14 +21,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author java-ws
+ * @author David Zuluaga
  */
 @Entity
 @Table(name = "warehouses")
@@ -47,15 +46,15 @@ public class Warehouses implements Serializable {
     @Basic(optional = false)
     @Column(name = "warehouses_Id")
     private Integer warehousesId;
-    @Size(max = 45)
+    //@Size(max = 45)
     @Column(name = "code")
     private String code;
-    @Size(max = 45)
+    //@Size(max = 45)
     @Column(name = "name")
     private String name;
     @Column(name = "isActived")
     private Boolean isActived;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "warehouses")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "warehousesId")
     private Collection<DocumentDetail> documentDetailCollection;
 
     public Warehouses() {
@@ -130,7 +129,7 @@ public class Warehouses implements Serializable {
     public String toString() {
         return "logica.Warehouses[ warehousesId=" + warehousesId + " ]";
     }
-    
+        
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
         EntityManager em = emf.createEntityManager();
