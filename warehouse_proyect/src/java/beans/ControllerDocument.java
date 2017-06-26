@@ -43,6 +43,7 @@ public class ControllerDocument implements Serializable {
     
     int temptd,tempw,tempi;
     float total = 0;
+    String visualTotal = "";
     boolean disabled,consecutive = true;
     String visibilityCreate = "inline",visibilityEdit = "none",visibilityUpdate = "none";
     String title = "Crear Documento";
@@ -60,6 +61,16 @@ public class ControllerDocument implements Serializable {
         ConsecutiveDocument();
     }
 
+    public String getVisualTotal() {
+        return visualTotal;
+    }
+
+    public void setVisualTotal(String visualTotal) {
+        this.visualTotal = visualTotal;
+    }
+
+
+    
     public float getTotal() {
         return total;
     }
@@ -381,6 +392,11 @@ public class ControllerDocument implements Serializable {
             }
             total += alldd.get(i).getPrice();
         }
+        
+        // visualTotal = total+"";
+        setTotal(total);
+        setVisualTotal(total+"");
+
     }
     public void deleteDetails(int ddd){
         for(int i = 0; i < alldd.size();i++){
