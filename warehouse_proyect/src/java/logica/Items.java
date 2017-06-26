@@ -6,7 +6,6 @@
 package logica;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author java-ws
+ * @author David Zuluaga
  */
 @Entity
 @Table(name = "items")
@@ -46,6 +45,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Items.findByIsActived", query = "SELECT i FROM Items i WHERE i.isActived = :isActived")})
 public class Items implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
+    private Collection<DocumentDetail> documentDetailCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,13 +55,13 @@ public class Items implements Serializable {
     @Column(name = "itemId")
     private Integer itemId;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "code")
     private String code;
     @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 45)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
     @Column(name = "lot")
@@ -68,15 +70,12 @@ public class Items implements Serializable {
     private Integer color;
     @Column(name = "size")
     private Integer size;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    //@NotNull
+    @NotNull
     @Column(name = "price")
-    private BigDecimal price;
+    private float price;
     @Column(name = "isActived")
     private Boolean isActived;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "items")
-    private Collection<DocumentDetail> documentDetailCollection;
 
     public Items() {
     }
@@ -85,7 +84,7 @@ public class Items implements Serializable {
         this.itemId = itemId;
     }
 
-    public Items(Integer itemId, String code, String name, BigDecimal price) {
+    public Items(Integer itemId, String code, String name, float price) {
         this.itemId = itemId;
         this.code = code;
         this.name = name;
@@ -140,11 +139,11 @@ public class Items implements Serializable {
         this.size = size;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -154,15 +153,6 @@ public class Items implements Serializable {
 
     public void setIsActived(Boolean isActived) {
         this.isActived = isActived;
-    }
-
-    @XmlTransient
-    public Collection<DocumentDetail> getDocumentDetailCollection() {
-        return documentDetailCollection;
-    }
-
-    public void setDocumentDetailCollection(Collection<DocumentDetail> documentDetailCollection) {
-        this.documentDetailCollection = documentDetailCollection;
     }
 
     @Override
@@ -189,10 +179,18 @@ public class Items implements Serializable {
     public String toString() {
         return "logica.Items[ itemId=" + itemId + " ]";
     }
-    
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
         EntityManager em = emf.createEntityManager();
         return em;
+    }
+
+    @XmlTransient
+    public Collection<DocumentDetail> getDocumentDetailCollection() {
+        return documentDetailCollection;
+    }
+
+    public void setDocumentDetailCollection(Collection<DocumentDetail> documentDetailCollection) {
+        this.documentDetailCollection = documentDetailCollection;
     }
 }

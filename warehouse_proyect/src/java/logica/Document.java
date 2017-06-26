@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author java-ws
+ * @author David Zuluaga
  */
 @Entity
 @Table(name = "document")
@@ -62,7 +62,7 @@ public class Document implements Serializable {
     @JoinColumn(name = "type_doc_Id", referencedColumnName = "type_doc_Id")
     @ManyToOne(optional = false)
     private TypeDoc typedocId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "document")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentId")
     private Collection<DocumentDetail> documentDetailCollection;
 
     public Document() {
@@ -143,11 +143,10 @@ public class Document implements Serializable {
     public String toString() {
         return "logica.Document[ documentId=" + documentId + " ]";
     }
-    
+        
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
         EntityManager em = emf.createEntityManager();
         return em;
     }
-    
 }

@@ -39,10 +39,11 @@ public class ControllerDocument implements Serializable {
     List<Warehouses> allw;
     List<Items> alli;
     List<Document> alld;
-    List<DocumentDetail> alldd;
+    List<DocumentDetail> alldd= new ArrayList<DocumentDetail>();
     
-    int temptd,tempw;
-    boolean disabled,concecutive = true;
+    int temptd,tempw,tempi;
+    float total = 0;
+    boolean disabled,consecutive = true;
     String visibilityCreate = "inline",visibilityEdit = "none",visibilityUpdate = "none";
     String title = "Crear Documento";
     
@@ -57,6 +58,22 @@ public class ControllerDocument implements Serializable {
         selectWarehouse();
         selectItems();
         ConsecutiveDocument();
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    public int getTempi() {
+        return tempi;
+    }
+
+    public void setTempi(int tempi) {
+        this.tempi = tempi;
     }
 
     public String getTitle() {
@@ -211,12 +228,12 @@ public class ControllerDocument implements Serializable {
         this.alldd = alldd;
     }
 
-    public boolean isConcecutive() {
-        return concecutive;
+    public boolean isConsecutive() {
+        return consecutive;
     }
 
-    public void setConcecutive(boolean concecutive) {
-        this.concecutive = concecutive;
+    public void setConsecutive(boolean consecutive) {
+        this.consecutive = consecutive;
     }
 
     public List<Items> getAlli() {
@@ -233,7 +250,7 @@ public class ControllerDocument implements Serializable {
         visibilityEdit = "none";
         visibilityUpdate = "none";
         visibilityCreate = "inline";
-        concecutive = true;
+        consecutive = true;
         d = new Document();
         
         ConsecutiveDocument();
@@ -242,7 +259,7 @@ public class ControllerDocument implements Serializable {
     public void searchD(){
         title = "Buscar Usuario";
         disabled = true;
-        concecutive = false;
+        consecutive = false;
         visibilityCreate = "none";
         visibilityUpdate = "none";
         visibilityEdit = "inline";
@@ -250,7 +267,7 @@ public class ControllerDocument implements Serializable {
     
     public void editD(){
         disabled = false;
-        concecutive = true;
+        consecutive = true;
         visibilityUpdate = "inline";
         visibilityCreate = "none";
         visibilityEdit = "none";
@@ -311,8 +328,9 @@ public class ControllerDocument implements Serializable {
     public void listItems(){
          EntityManager em = i.getEntityManager();
         //Query tipado con el tipo de objeto a extraer
-        TypedQuery<Items> consuli= em.createNamedQuery("Items.findAll",Items.class);
-         //captura de listado de la consulta
+        TypedQuery<Items> consuli= em.createNamedQuery("Items.findByIsActived",Items.class);
+         //captura de listado de la consulta 
+        consuli.setParameter("isActived", true);
         alli = consuli.getResultList();
     }
     
@@ -332,10 +350,9 @@ public class ControllerDocument implements Serializable {
     }
     
     public void addDetails(){
-        if(alldd == null)
-            alldd = new ArrayList<DocumentDetail>();
-        
-        alldd.add(new DocumentDetail());
+        DocumentDetail tempdd = new DocumentDetail();
+        tempdd.setDocumentdatailId(alldd.size()+1);
+        alldd.add(tempdd);
     }
     public void searchDetails(){
         EntityManager em = d.getEntityManager();
@@ -343,7 +360,35 @@ public class ControllerDocument implements Serializable {
         consultDocument.setParameter("consecutive",d.getConsecutive());
         List<Document> document = consultDocument.getResultList();
     }
-    public void deleteItem(){
-        
+    public void calculatePST(int ddd)
+    {
+        //List<DocumentDetail> alldd2 = alldd;
+        //alldd.clear();
+        total = 0;
+        for(int i = 0; i < alldd.size();i++){
+            if(alldd.get(i).getDocumentdatailId() == ddd){
+                for(int j = 0; j < alli.size(); j++){
+                    if(alli.get(j).getItemId() == (alldd.get(i).getTempi()+1)){
+                        alldd.get(i).setItemId(alli.get(j));
+                        alldd.get(i).setPrice(alldd.get(i).getQuantity()*alli.get(j).getPrice());
+                    }
+                }
+                for(int j = 0; j < allw.size(); j++){
+                    if(allw.get(j).getWarehousesId() == (alldd.get(i).getTempw()+1)){
+                        alldd.get(i).setWarehousesId(allw.get(j));
+                    }
+                }
+            }
+            total += alldd.get(i).getPrice();
+        }
+    }
+    public void deleteDetails(int ddd){
+        for(int i = 0; i < alldd.size();i++){
+            if(alldd.get(i).getDocumentdatailId() == ddd){
+                total -= alldd.get(i).getPrice();
+                alldd.remove(i);
+                i--;
+            }
+        }
     }
 }

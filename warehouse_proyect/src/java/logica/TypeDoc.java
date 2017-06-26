@@ -13,20 +13,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author java-ws
+ * @author David Zuluaga
  */
 @Entity
 @Table(name = "type_doc")
@@ -40,8 +41,8 @@ public class TypeDoc implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "type_doc_Id")
     private Integer typedocId;
     @Size(max = 4)
@@ -117,7 +118,7 @@ public class TypeDoc implements Serializable {
     public String toString() {
         return "logica.TypeDoc[ typedocId=" + typedocId + " ]";
     }
-    
+        
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
         EntityManager em = emf.createEntityManager();

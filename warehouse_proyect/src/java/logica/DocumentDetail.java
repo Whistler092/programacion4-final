@@ -8,10 +8,12 @@ package logica;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -23,59 +25,61 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author java-ws
+ * @author David Zuluaga
  */
 @Entity
 @Table(name = "document_detail")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DocumentDetail.findAll", query = "SELECT d FROM DocumentDetail d")
-    , @NamedQuery(name = "DocumentDetail.findByDocumentdatailId", query = "SELECT d FROM DocumentDetail d WHERE d.documentDetailPK.documentdatailId = :documentdatailId")
-    , @NamedQuery(name = "DocumentDetail.findByDocumentId", query = "SELECT d FROM DocumentDetail d WHERE d.documentDetailPK.documentId = :documentId")
+    , @NamedQuery(name = "DocumentDetail.findByDocumentdatailId", query = "SELECT d FROM DocumentDetail d WHERE d.documentdatailId = :documentdatailId")
     , @NamedQuery(name = "DocumentDetail.findByQuantity", query = "SELECT d FROM DocumentDetail d WHERE d.quantity = :quantity")
-    , @NamedQuery(name = "DocumentDetail.findByWarehousesId", query = "SELECT d FROM DocumentDetail d WHERE d.documentDetailPK.warehousesId = :warehousesId")
-    , @NamedQuery(name = "DocumentDetail.findByItemId", query = "SELECT d FROM DocumentDetail d WHERE d.documentDetailPK.itemId = :itemId")})
+    , @NamedQuery(name = "DocumentDetail.findByPrice", query = "SELECT d FROM DocumentDetail d WHERE d.price = :price")})
 public class DocumentDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected DocumentDetailPK documentDetailPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "document_datail_Id")
+    private Integer documentdatailId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Quantity")
     private int quantity;
-    @JoinColumn(name = "document_id", referencedColumnName = "document_id", insertable = false, updatable = false)
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "price")
+    private float price;
+    @JoinColumn(name = "document_id", referencedColumnName = "document_id")
     @ManyToOne(optional = false)
-    private Document document;
-    @JoinColumn(name = "itemId", referencedColumnName = "itemId", insertable = false, updatable = false)
+    private Document documentId;
+    @JoinColumn(name = "itemId", referencedColumnName = "itemId")
     @ManyToOne(optional = false)
-    private Items items;
-    @JoinColumn(name = "warehouses_Id", referencedColumnName = "warehouses_Id", insertable = false, updatable = false)
+    private Items itemId;
+    @JoinColumn(name = "warehouses_Id", referencedColumnName = "warehouses_Id")
     @ManyToOne(optional = false)
-    private Warehouses warehouses;
-
+    private Warehouses warehousesId;
+    private int tempw,tempi;
     public DocumentDetail() {
     }
 
-    public DocumentDetail(DocumentDetailPK documentDetailPK) {
-        this.documentDetailPK = documentDetailPK;
+    public DocumentDetail(Integer documentdatailId) {
+        this.documentdatailId = documentdatailId;
     }
 
-    public DocumentDetail(DocumentDetailPK documentDetailPK, int quantity) {
-        this.documentDetailPK = documentDetailPK;
+    public DocumentDetail(Integer documentdatailId, int quantity, float price) {
+        this.documentdatailId = documentdatailId;
         this.quantity = quantity;
+        this.price = price;
     }
 
-    public DocumentDetail(int documentdatailId, int documentId, int warehousesId, int itemId) {
-        this.documentDetailPK = new DocumentDetailPK(documentdatailId, documentId, warehousesId, itemId);
+    public Integer getDocumentdatailId() {
+        return documentdatailId;
     }
 
-    public DocumentDetailPK getDocumentDetailPK() {
-        return documentDetailPK;
-    }
-
-    public void setDocumentDetailPK(DocumentDetailPK documentDetailPK) {
-        this.documentDetailPK = documentDetailPK;
+    public void setDocumentdatailId(Integer documentdatailId) {
+        this.documentdatailId = documentdatailId;
     }
 
     public int getQuantity() {
@@ -86,34 +90,58 @@ public class DocumentDetail implements Serializable {
         this.quantity = quantity;
     }
 
-    public Document getDocument() {
-        return document;
+    public float getPrice() {
+        return price;
     }
 
-    public void setDocument(Document document) {
-        this.document = document;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
-    public Items getItems() {
-        return items;
+    public Document getDocumentId() {
+        return documentId;
     }
 
-    public void setItems(Items items) {
-        this.items = items;
+    public void setDocumentId(Document documentId) {
+        this.documentId = documentId;
     }
 
-    public Warehouses getWarehouses() {
-        return warehouses;
+    public Items getItemId() {
+        return itemId;
     }
 
-    public void setWarehouses(Warehouses warehouses) {
-        this.warehouses = warehouses;
+    public void setItemId(Items itemId) {
+        this.itemId = itemId;
     }
 
+    public Warehouses getWarehousesId() {
+        return warehousesId;
+    }
+
+    public void setWarehousesId(Warehouses warehousesId) {
+        this.warehousesId = warehousesId;
+    }
+
+    public int getTempw() {
+        return tempw;
+    }
+
+    public void setTempw(int tempw) {
+        this.tempw = tempw;
+    }
+
+    public int getTempi() {
+        return tempi;
+    }
+
+    public void setTempi(int tempi) {
+        this.tempi = tempi;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (documentDetailPK != null ? documentDetailPK.hashCode() : 0);
+        hash += (documentdatailId != null ? documentdatailId.hashCode() : 0);
         return hash;
     }
 
@@ -124,7 +152,7 @@ public class DocumentDetail implements Serializable {
             return false;
         }
         DocumentDetail other = (DocumentDetail) object;
-        if ((this.documentDetailPK == null && other.documentDetailPK != null) || (this.documentDetailPK != null && !this.documentDetailPK.equals(other.documentDetailPK))) {
+        if ((this.documentdatailId == null && other.documentdatailId != null) || (this.documentdatailId != null && !this.documentdatailId.equals(other.documentdatailId))) {
             return false;
         }
         return true;
@@ -132,9 +160,8 @@ public class DocumentDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "logica.DocumentDetail[ documentDetailPK=" + documentDetailPK + " ]";
+        return "logica.DocumentDetail[ documentdatailId=" + documentdatailId + " ]";
     }
-    
     
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse_proyectPU");
