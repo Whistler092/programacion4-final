@@ -5,4 +5,5 @@
 /warehouse_proyect/nbproject/private/
 /warehouse_proyect/build/
 /warehouse_proyect/dist/
-
+/warehouse_proyect/nbproject/project.properties
+/warehouse_proyect/web/WEB-INF/glassfish-resources.xml

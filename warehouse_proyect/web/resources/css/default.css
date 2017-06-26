@@ -6,6 +6,10 @@ body {
     margin: 10px;
 }
 
+label {
+    color: white;
+}
+
 h1 {
     font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     border-bottom: 1px solid #AFAFAF; 
@@ -17,13 +21,13 @@ h1 {
 }
 
 a:link, a:visited {
-  color: #045491;
+  color: white !important /*#045491*/;
   font-weight : bold;
   text-decoration: none;
 }
 
 a:link:hover, a:visited:hover  {
-  color: #045491;
+  color: white !important;
   font-weight : bold;
   text-decoration : underline;
 }
