@@ -275,7 +275,7 @@ public class ControllerDocument implements Serializable {
     }
     
     public void searchD(){
-        title = "Buscar Usuario";
+        title = "Buscar Documento";
         disabled = true;
         consecutive = false;
         visibilityCreate = "none";
