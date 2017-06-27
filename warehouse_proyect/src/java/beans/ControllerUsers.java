@@ -223,7 +223,7 @@ public class ControllerUsers implements Serializable {
                         isChiefWarehouse = true;
                     }
                     isLogIn = true;
-                    loginusers = "views/users.xhtml";
+                    loginusers = "views/welcome.xhtml";
                     u = new Users();
                     break;
                 }
@@ -299,5 +299,11 @@ public class ControllerUsers implements Serializable {
     public void canceledit(){
         searchUsers();
         searchU();
+    }
+    public String exit(){
+        ulogin = new Users();
+        isLogIn = false;
+        
+        return "index.xhtml";
     }
 }

@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-lg-2 control-label">
                                     <h:commandLink class="btn btn-primary btn-sm" style="display: #{controllerDocument.visibilityEdit};" action="#{controllerDocument.searchDocument()}"> 
-                                        <h:graphicImage url="resources/img/search.png" styleClass="searchproduct" />
+                                        <h:graphicImage url="../resources/img/search.png" styleClass="searchproduct" />
                                     </h:commandLink>
                                 </div>
                             </div>
@@ -53,7 +53,8 @@
                                     <h:column >
                                         <f:facet name="header">Producto</f:facet>
                                         <h:selectOneMenu value="#{ddd.tempi}" class="form-control" style="width: 150px;">
-                                            <f:selectItems value="#{controllerDocument.selectTypeItems}"/>
+                                            <f:selectItems value="#{controllerDocument.alli}" var="i" itemValue="#{i.itemId}" itemLabel="#{i.name}" >
+                                            </f:selectItems>
                                         </h:selectOneMenu>
                                     </h:column>
                                     <h:column >
@@ -66,13 +67,15 @@
                                         <f:facet name="header">Cantidad</f:facet>
                                         <div class="col-lg-8">
                                             <h:inputText class="form-control" id="name" p:placeholder="Digitar Cantidad" value="#{ddd.dd.quantity}" >
-                                                <f:ajax event="blur" render="textboxname2" listener="#{controllerDocument.calculatePST(ddd.documentDetailId)}"/>                                            
+                                                <f:ajax event="blur" render="textboxname2" listener="#{controllerDocument.calculatePST(1)}"/>                                            
                                             </h:inputText>
                                         </div>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">Precio Total</f:facet>
-                                        <h:outputText  value="#{ddd.dd.price}"></h:outputText>
+                                        <h:outputText  value="#{ddd.dd.price}">
+                                            <f:convertNumber currencySymbol="$" type="number"/>
+                                        </h:outputText>
                                     </h:column>
                                     <h:column >
                                         <f:facet name="header"><center>Accion</center></f:facet>
@@ -86,10 +89,12 @@
                             </div>
                             
                             <div class="form-group">
+                                <div class="col-lg-5"></div>
                                 <div class="col-lg-2 control-label"><h:outputLabel> Total </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-3">
-                                    <h:inputText class="form-control" id="total" value="#{controllerDocument.visualTotal}"  disabled="false">
+                                    <h:inputText class="form-control" id="total" value="#{controllerDocument.visualTotal}"  disabled="true">
+                                        <f:convertNumber currencySymbol="$" type="number"/>
                                     </h:inputText>
                                 </div>
                             </div>
@@ -97,7 +102,7 @@
                                 <h:commandLink class="btn btn-primary btn-primary" action="#{controllerDocument.editD()}"  style="display: #{controllerDocument.visibilityEdit};"> Editar </h:commandLink>
                                 <h:commandLink class="btn btn-primary btn-primary" action="#{controllerDocument.addCreateDocument()}" style="display: #{controllerDocument.visibilityCreate};"> Crear Documento</h:commandLink>
                                 <h:commandLink class="btn btn-success btn-primary" action="#{controllerDocument.searchD()}"  style="display: #{controllerDocument.visibilityUpdate};"> Actualizar</h:commandLink>
-                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerDocument.searchD()}"  style="display: #{controllerDocument.visibilityUpdate};"> Cancelar </h:commandLink>
+                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerDocument.searchDocument()}"  style="display: #{controllerDocument.visibilityUpdate};"> Cancelar </h:commandLink>
                             </center>
                         </fieldset>
                     </h:form>

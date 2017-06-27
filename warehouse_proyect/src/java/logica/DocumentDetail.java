@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DocumentDetail.findAll", query = "SELECT d FROM DocumentDetail d")
+    , @NamedQuery(name = "DocumentDetail.findByDocument", query = "SELECT d FROM DocumentDetail d WHERE d.documentId = :documentId")
     , @NamedQuery(name = "DocumentDetail.findByDocumentdatailId", query = "SELECT d FROM DocumentDetail d WHERE d.documentdatailId = :documentdatailId")
     , @NamedQuery(name = "DocumentDetail.findByQuantity", query = "SELECT d FROM DocumentDetail d WHERE d.quantity = :quantity")
     , @NamedQuery(name = "DocumentDetail.findByPrice", query = "SELECT d FROM DocumentDetail d WHERE d.price = :price")})

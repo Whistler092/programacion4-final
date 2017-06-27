@@ -8,6 +8,8 @@ package beans;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -268,6 +270,7 @@ public class ControllerDocument implements Serializable {
         consecutive = true;
         d = new Document();
         alldd = new ArrayList<DocumentDetail2>();
+        visualTotal = "0";
         ConsecutiveDocument();
     }
     
@@ -278,6 +281,10 @@ public class ControllerDocument implements Serializable {
         visibilityCreate = "none";
         visibilityUpdate = "none";
         visibilityEdit = "inline";
+        d = new Document();
+        alldd = new ArrayList<DocumentDetail2>();
+        visualTotal = "0";
+        ConsecutiveDocument();
     }
     
     public void editD(){
@@ -295,8 +302,29 @@ public class ControllerDocument implements Serializable {
         List<Document> document = consultDocument.getResultList();
         if(document.size()>0){
             d = document.get(0);
+            alldd = new ArrayList<DocumentDetail2>();
+            total = 0;
+            em = dd.getEntityManager();
+            TypedQuery<DocumentDetail> consultDocumentD = em.createNamedQuery("DocumentDetail.findByDocument",DocumentDetail.class);
+            consultDocumentD.setParameter("documentId",d);
+            List<DocumentDetail> documentD = consultDocumentD.getResultList();
+            for(int i  = 0; i < documentD.size();i++){
+                DocumentDetail2 dd2  = new DocumentDetail2();
+                dd2.setDd(documentD.get(i));
+                dd2.setDocumentDetailId(i);
+                dd2.setTempi(documentD.get(i).getItemId().getItemId());
+                dd2.setTempw(documentD.get(i).getWarehousesId().getWarehousesId());
+                alldd.add(dd2);
+                total +=  dd2.getDd().getPrice();
+            }
+            visualTotal = new BigDecimal(total)+"";
+            disabled = true;
+            consecutive = false;
+            visibilityCreate = "none";
+            visibilityUpdate = "none";
+            visibilityEdit = "inline";
         }else{
-            d = new Document();
+            searchD();
         }
     }  
     public void ConsecutiveDocument(){
@@ -368,6 +396,7 @@ public class ControllerDocument implements Serializable {
         DocumentDetail2 tempdd = new DocumentDetail2();
         tempdd.setDocumentDetailId(alldd.size()+1);
         tempdd.setDd(new DocumentDetail());
+        calculatePST(2);
         alldd.add(tempdd);
     }
     public void searchDetails(){
@@ -377,8 +406,14 @@ public class ControllerDocument implements Serializable {
         List<Document> document = consultDocument.getResultList();
     }
     
-    public void calculatePST(int ddd)
+    public void validate(int value){
+        tempi = value;
+    }
+    
+    public void calculatePST(int var)
     {
+        double d = 0;
+        
         //List<DocumentDetail> alldd2 = alldd;
         //alldd.clear();
         total = 0;
@@ -388,6 +423,8 @@ public class ControllerDocument implements Serializable {
                     if(alli.get(j).getItemId() == (alldd.get(i).getTempi())){
                         alldd.get(i).getDd().setItemId(alli.get(j));
                         alldd.get(i).getDd().setPrice(alldd.get(i).getDd().getQuantity()*alli.get(j).getPrice());
+                        d +=  alldd.get(i).getDd().getQuantity()*alli.get(j).getPrice();
+                        //d = 50 * 4000000;
                     }
                 }
                 for(int j = 0; j < allw.size(); j++){
@@ -396,12 +433,14 @@ public class ControllerDocument implements Serializable {
                     }
                 }
             //}
+            
             total += alldd.get(i).getDd().getPrice();
         }
+         visualTotal = new BigDecimal(d)+"";
         
-        // visualTotal = total+"";
-        setTotal(total);
-        setVisualTotal(total+"");
+        if(var == 1){
+            calculatePST(2);
+        }
 
     }
     public void deleteDetails(int ddd){

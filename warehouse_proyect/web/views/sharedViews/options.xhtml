@@ -46,7 +46,6 @@
                                     </h:commandLink> 
                                 </li>
                                 <li style="display: #{controllerUsers.isChiefWarehouse ? 'none' : 'inline'} ">
-
                                     <h:commandLink class="btn btn-default" action="/views/reports.xhtml"> Reportes
                                         <f:ajax execute="@form" render="/views/reports.xhtml" />
                                     </h:commandLink> 
@@ -54,7 +53,12 @@
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">usuario: <h:outputLabel value="#{controllerUsers.ulogin.name}"></h:outputLabel></a></li>
+                                <li>
+                                    <h:commandLink action="../../index.xhtml"> 
+                                        <h:outputLabel value="usuario:"></h:outputLabel> #{controllerUsers.ulogin.name}
+                                        <f:ajax execute="@form" render="../../index.xhtml" />
+                                    </h:commandLink>
+                                </li>
                             </ul>
                         </div>
                     </div>
