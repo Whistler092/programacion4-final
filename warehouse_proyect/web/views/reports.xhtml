@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -10,7 +12,65 @@
                 <ui:include src="./sharedViews/options.xhtml" />
             </ui:define>
             <ui:define name="content">
-                content
+                <h:form>
+                    <center>
+                        <h:commandLink class="btn btn-info btn-primary" action="#{controllerReports.loadAll()}"  > 
+                            Ver todos los productos y la rotación en unidades que han tenido 
+                        </h:commandLink>
+
+                        <h:commandLink class="btn btn-danger btn-primary" action="#{controllerReports.loadLess()}"  > Ver productos que menos rotan </h:commandLink>
+
+                        <h:commandLink class="btn btn-danger btn-primary" action="#{controllerReports.loadMore()}" > Ver productos que mas rotan </h:commandLink>
+                    </center>
+                </h:form>
+                <div style="display: #{controllerReports.listProducts.size() > 0};"> 
+                    <h:dataTable class="table" value="#{controllerReports.listProducts}" var="it">
+                        <h:column >
+                            <f:facet name="header">Nombre</f:facet>
+                                #{it.articulo}
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">Entrada</f:facet>
+                                #{it.entradas}
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">Salida</f:facet>
+                                #{it.sallidas}
+                        </h:column>
+
+                        <h:column >
+                            <f:facet name="header">Bodega</f:facet>
+                                #{it.bodega}
+                        </h:column><h:column >
+                            <f:facet name="header">Fecha</f:facet>
+                                #{it.fecha}
+                        </h:column><h:column >
+                            <f:facet name="header">Documento de Registro</f:facet>
+                                #{it.consecutivo}
+                        </h:column>
+                    </h:dataTable>
+                </div>
+                <div style="display: #{controllerReports.listMoreProducts.size() > 0};"> 
+                    <h:dataTable class="table" value="#{controllerReports.listMoreProducts}" var="it">
+                        <h:column >
+                            <f:facet name="header">Nombre</f:facet>
+                                #{it.articulo}
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">Entrada</f:facet>
+                                #{it.entradas}
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">Salida</f:facet>
+                                #{it.sallidas}
+                        </h:column>
+ <h:column >
+                            <f:facet name="header">Total</f:facet>
+                                #{it.total}
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
             </ui:define>
 
         </ui:composition>
