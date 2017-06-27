@@ -69,9 +69,9 @@ public class ControllerReports implements Serializable {
                 ListMoreProducts.add(newProduct);
             } else {
                 if (selectedItem.getDocumentId().getTypedocId().getCode().equals("1")) {
-                    alreadyItem.setEntradas(alreadyItem.getEntradas() + selectedItem.getQuantity());
+                    alreadyItem.setEntradas((alreadyItem.getEntradas() != null ? alreadyItem.getEntradas() : 0) + selectedItem.getQuantity());
                 } else {
-                    alreadyItem.setSallidas(alreadyItem.getSallidas() + selectedItem.getQuantity());
+                    alreadyItem.setSallidas((alreadyItem.getSallidas() != null ? alreadyItem.getSallidas() : 0) + selectedItem.getQuantity());
                 }
             }
         }
@@ -90,11 +90,7 @@ public class ControllerReports implements Serializable {
 
     public void SumMoreProducts() {
         for (Products selectedItem : ListMoreProducts) {
-            selectedItem.setTotal((selectedItem.getEntradas() != null ? selectedItem.getEntradas() : 0)- (selectedItem.getSallidas() != null ? selectedItem.getSallidas() : 0
-        
-    
-
-    ));
+            selectedItem.setTotal((selectedItem.getEntradas() != null ? selectedItem.getEntradas() : 0) - (selectedItem.getSallidas() != null ? selectedItem.getSallidas() : 0));
         }
     }
 

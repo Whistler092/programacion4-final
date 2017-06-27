@@ -17,14 +17,11 @@
                         <h:commandLink class="btn btn-info btn-primary" action="#{controllerReports.loadAll()}"  > 
                             Ver todos los productos y la rotación en unidades que han tenido 
                         </h:commandLink>
-
-                        <h:commandLink class="btn btn-danger btn-primary" action="#{controllerReports.loadLess()}"  > Ver productos que menos rotan </h:commandLink>
-
-                        <h:commandLink class="btn btn-danger btn-primary" action="#{controllerReports.loadMore()}" > Ver productos que mas rotan </h:commandLink>
+                        <h:commandLink class="btn btn-danger btn-primary" action="#{controllerReports.loadMore()}"  > Ver inventario de productos </h:commandLink>
                     </center>
                 </h:form>
-                <div style="display: #{controllerReports.listProducts.size() > 0};"> 
-                    <h:dataTable class="table" value="#{controllerReports.listProducts}" var="it">
+                <div > 
+                    <h:dataTable style="display: #{controllerReports.listProducts.size() > 0};" class="table" value="#{controllerReports.listProducts}" var="it">
                         <h:column >
                             <f:facet name="header">Nombre</f:facet>
                                 #{it.articulo}
@@ -50,8 +47,8 @@
                         </h:column>
                     </h:dataTable>
                 </div>
-                <div style="display: #{controllerReports.listMoreProducts.size() > 0};"> 
-                    <h:dataTable class="table" value="#{controllerReports.listMoreProducts}" var="it">
+                <div> 
+                    <h:dataTable  style="display: #{controllerReports.listMoreProducts.size() > 0};" class="table" value="#{controllerReports.listMoreProducts}" var="it">
                         <h:column >
                             <f:facet name="header">Nombre</f:facet>
                                 #{it.articulo}
