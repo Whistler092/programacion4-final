@@ -60,7 +60,6 @@ public class DocumentDetail implements Serializable {
     @JoinColumn(name = "warehouses_Id", referencedColumnName = "warehouses_Id")
     @ManyToOne(optional = false)
     private Warehouses warehousesId;
-    private int tempw,tempi;
     public DocumentDetail() {
     }
 
@@ -122,21 +121,6 @@ public class DocumentDetail implements Serializable {
         this.warehousesId = warehousesId;
     }
 
-    public int getTempw() {
-        return tempw;
-    }
-
-    public void setTempw(int tempw) {
-        this.tempw = tempw;
-    }
-
-    public int getTempi() {
-        return tempi;
-    }
-
-    public void setTempi(int tempi) {
-        this.tempi = tempi;
-    }
     
     @Override
     public int hashCode() {

@@ -53,7 +53,7 @@
                                     <h:column >
                                         <f:facet name="header">Producto</f:facet>
                                         <h:selectOneMenu value="#{ddd.tempi}" class="form-control" style="width: 150px;">
-                                            <f:selectItems value="#{controllerDocument.selectTypeItems}" />
+                                            <f:selectItems value="#{controllerDocument.selectTypeItems}"/>
                                         </h:selectOneMenu>
                                     </h:column>
                                     <h:column >
@@ -65,18 +65,18 @@
                                     <h:column >
                                         <f:facet name="header">Cantidad</f:facet>
                                         <div class="col-lg-8">
-                                            <h:inputText class="form-control" id="name" p:placeholder="Digitar Cantidad" value="#{ddd.quantity}" >
-                                                <f:ajax event="blur" render="textboxname2" listener="#{controllerDocument.calculatePST(ddd.documentdatailId)}"/>                                            
+                                            <h:inputText class="form-control" id="name" p:placeholder="Digitar Cantidad" value="#{ddd.dd.quantity}" >
+                                                <f:ajax event="blur" render="textboxname2" listener="#{controllerDocument.calculatePST(ddd.documentDetailId)}"/>                                            
                                             </h:inputText>
                                         </div>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">Precio Total</f:facet>
-                                        <h:outputText  value="#{ddd.price}"></h:outputText>
+                                        <h:outputText  value="#{ddd.dd.price}"></h:outputText>
                                     </h:column>
                                     <h:column >
                                         <f:facet name="header"><center>Accion</center></f:facet>
-                                        <center><h:commandLink class="btn btn-danger btn-xs" action="#{controllerDocument.deleteDetails(ddd)}" > - </h:commandLink></center> 
+                                        <center><h:commandLink class="btn btn-danger btn-xs" action="#{controllerDocument.deleteDetails(ddd.documentDetailId)}" > - </h:commandLink></center> 
                                     </h:column>
                                 </h:dataTable>
                                 </div>
@@ -89,15 +89,15 @@
                                 <div class="col-lg-2 control-label"><h:outputLabel> Total </h:outputLabel></div>
                                 <!--label for="inputEmail" class="col-lg-2 control-label">Email</label-->
                                 <div class="col-lg-3">
-                                    <h:inputText class="form-control" id="total" value="#{controllerDocument.total}"  disabled="false">
+                                    <h:inputText class="form-control" id="total" value="#{controllerDocument.visualTotal}"  disabled="false">
                                     </h:inputText>
                                 </div>
                             </div>
                             <center> 
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerProperties.editM()}"  style="display: #{controllerProperties.visibilityEdit};"> Editar </h:commandLink>
-                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerUsers.addUsers()}" style="display: #{controllerProperties.visibilityCreate};"> Crear Documento</h:commandLink>
-                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerProperties.searchM(controllerUsers.updateUsers())}"  style="display: #{controllerProperties.visibilityUpdate};"> Actualizar</h:commandLink>
-                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerProperties.searchM(controllerUsers.canceledit())}"  style="display: #{controllerProperties.visibilityUpdate};"> Cancelar </h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerDocument.editD()}"  style="display: #{controllerDocument.visibilityEdit};"> Editar </h:commandLink>
+                                <h:commandLink class="btn btn-primary btn-primary" action="#{controllerDocument.addCreateDocument()}" style="display: #{controllerDocument.visibilityCreate};"> Crear Documento</h:commandLink>
+                                <h:commandLink class="btn btn-success btn-primary" action="#{controllerDocument.searchD()}"  style="display: #{controllerDocument.visibilityUpdate};"> Actualizar</h:commandLink>
+                                <h:commandLink class="btn btn-danger btn-primary" action="#{controllerDocument.searchD()}"  style="display: #{controllerDocument.visibilityUpdate};"> Cancelar </h:commandLink>
                             </center>
                         </fieldset>
                     </h:form>

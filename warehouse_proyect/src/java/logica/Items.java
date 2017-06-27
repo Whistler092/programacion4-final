@@ -56,12 +56,12 @@ public class Items implements Serializable {
     private Integer itemId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    //@Size(min = 1, max = 45)
     @Column(name = "code")
     private String code;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    //@Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
     @Column(name = "lot")

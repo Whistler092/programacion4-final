@@ -23,7 +23,7 @@ import logica.UsersType;
 @SessionScoped
 public class ControllerUsers implements Serializable {
 
-    boolean isLogIn = false;
+    boolean isLogIn = false,isChiefWarehouse = false;
     boolean disabled;
 
     Users ulogin = new Users();
@@ -158,6 +158,14 @@ public class ControllerUsers implements Serializable {
             selectTypeUser[i] = new SelectItem(utype.getIdusersType(), utype.getNameType());
         }
     }
+
+    public boolean isIsChiefWarehouse() {
+        return isChiefWarehouse;
+    }
+
+    public void setIsChiefWarehouse(boolean isChiefWarehouse) {
+        this.isChiefWarehouse = isChiefWarehouse;
+    }
     
     public void createU(){
         title = "Crear Usuario";
@@ -211,6 +219,9 @@ public class ControllerUsers implements Serializable {
                 }
                 else if(user.getName().trim().equals(u.getName().trim()) && u.getPasswordUser() != null && user.getPasswordUser().equals(u.getPasswordUser())){
                     ulogin = user;
+                    if(ulogin != null && ulogin.getIdusersType().getCodeType().toUpperCase().equals("J".toUpperCase())){
+                        isChiefWarehouse = true;
+                    }
                     isLogIn = true;
                     loginusers = "views/users.xhtml";
                     u = new Users();

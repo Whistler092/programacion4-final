@@ -9,12 +9,15 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import logica.Document;
 import logica.DocumentDetail;
+import logica.DocumentDetail2;
 import logica.Items;
 import logica.TypeDoc;
 import logica.Warehouses;
@@ -39,7 +42,7 @@ public class ControllerDocument implements Serializable {
     List<Warehouses> allw;
     List<Items> alli;
     List<Document> alld;
-    List<DocumentDetail> alldd= new ArrayList<DocumentDetail>();
+    List<DocumentDetail2> alldd= new ArrayList<DocumentDetail2>();
     
     int temptd,tempw,tempi;
     float total = 0;
@@ -231,13 +234,14 @@ public class ControllerDocument implements Serializable {
         this.alld = alld;
     }
 
-    public List<DocumentDetail> getAlldd() {
+    public List<DocumentDetail2> getAlldd() {
         return alldd;
     }
 
-    public void setAlldd(List<DocumentDetail> alldd) {
+    public void setAlldd(List<DocumentDetail2> alldd) {
         this.alldd = alldd;
     }
+
 
     public boolean isConsecutive() {
         return consecutive;
@@ -263,7 +267,7 @@ public class ControllerDocument implements Serializable {
         visibilityCreate = "inline";
         consecutive = true;
         d = new Document();
-        
+        alldd = new ArrayList<DocumentDetail2>();
         ConsecutiveDocument();
     }
     
@@ -361,8 +365,9 @@ public class ControllerDocument implements Serializable {
     }
     
     public void addDetails(){
-        DocumentDetail tempdd = new DocumentDetail();
-        tempdd.setDocumentdatailId(alldd.size()+1);
+        DocumentDetail2 tempdd = new DocumentDetail2();
+        tempdd.setDocumentDetailId(alldd.size()+1);
+        tempdd.setDd(new DocumentDetail());
         alldd.add(tempdd);
     }
     public void searchDetails(){
@@ -371,26 +376,27 @@ public class ControllerDocument implements Serializable {
         consultDocument.setParameter("consecutive",d.getConsecutive());
         List<Document> document = consultDocument.getResultList();
     }
+    
     public void calculatePST(int ddd)
     {
         //List<DocumentDetail> alldd2 = alldd;
         //alldd.clear();
         total = 0;
         for(int i = 0; i < alldd.size();i++){
-            if(alldd.get(i).getDocumentdatailId() == ddd){
+            //if(alldd.get(i).getDocumentdatailId() == ddd){
                 for(int j = 0; j < alli.size(); j++){
-                    if(alli.get(j).getItemId() == (alldd.get(i).getTempi()+1)){
-                        alldd.get(i).setItemId(alli.get(j));
-                        alldd.get(i).setPrice(alldd.get(i).getQuantity()*alli.get(j).getPrice());
+                    if(alli.get(j).getItemId() == (alldd.get(i).getTempi())){
+                        alldd.get(i).getDd().setItemId(alli.get(j));
+                        alldd.get(i).getDd().setPrice(alldd.get(i).getDd().getQuantity()*alli.get(j).getPrice());
                     }
                 }
                 for(int j = 0; j < allw.size(); j++){
-                    if(allw.get(j).getWarehousesId() == (alldd.get(i).getTempw()+1)){
-                        alldd.get(i).setWarehousesId(allw.get(j));
+                    if(allw.get(j).getWarehousesId() == (alldd.get(i).getTempw())){
+                        alldd.get(i).getDd().setWarehousesId(allw.get(j));
                     }
                 }
-            }
-            total += alldd.get(i).getPrice();
+            //}
+            total += alldd.get(i).getDd().getPrice();
         }
         
         // visualTotal = total+"";
@@ -400,11 +406,39 @@ public class ControllerDocument implements Serializable {
     }
     public void deleteDetails(int ddd){
         for(int i = 0; i < alldd.size();i++){
-            if(alldd.get(i).getDocumentdatailId() == ddd){
-                total -= alldd.get(i).getPrice();
+            if(alldd.get(i).getDocumentDetailId() == ddd){
+                total -= alldd.get(i).getDd().getPrice();
                 alldd.remove(i);
                 i--;
             }
         }
+    }
+    
+    public void addCreateDocument(){
+        d.setDocumentDate(new Date());
+        for(int i = 0; i < alltd.size(); i++){
+            if(alltd.get(i).getTypedocId() == temptd){
+                d.setTypedocId(alltd.get(i));
+            }
+        }
+        EntityManager em = d.getEntityManager();
+        em.getTransaction().begin();
+        em.persist(d);
+        em.getTransaction().commit();
+        
+        for(int i = 0; i < alldd.size(); i++){
+            if(alldd.get(i).getDd().getItemId() == null || alldd.get(i).getDd().getWarehousesId() == null || alldd.get(i).getDd().getQuantity() == 0){
+                alldd.remove(i);
+                i--;
+            }
+        }
+        for(int i = 0; i < alldd.size(); i++){
+            alldd.get(i).getDd().setDocumentId(d);
+            EntityManager em2 = alldd.get(i).getDd().getEntityManager();
+            em2.getTransaction().begin();
+            em2.persist(alldd.get(i).getDd());
+            em2.getTransaction().commit();
+        }
+        createD();
     }
 }

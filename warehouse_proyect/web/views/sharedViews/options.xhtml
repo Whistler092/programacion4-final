@@ -25,27 +25,27 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li >
+                                <li style="display: #{controllerUsers.isChiefWarehouse ? 'inline' : 'none'} ">
                                     <h:commandLink class="btn btn-default" action="/views/users.xhtml"> Usuarios 
                                         <f:ajax execute="@form" render="/views/users.xhtml" />
                                     </h:commandLink>     
                                 </li>
-                                <li >
+                                <li  style="display: #{controllerUsers.isChiefWarehouse ? 'inline' : 'none'} ">
                                     <h:commandLink class="btn btn-default" action="/views/products.xhtml"> Articulos
                                         <f:ajax execute="@form" render="/views/products.xhtml" />
                                     </h:commandLink> 
                                 </li>
-                                <li >
+                                <li style="display: #{controllerUsers.isChiefWarehouse ? 'inline' : 'none'} ">
                                     <h:commandLink class="btn btn-default" action="/views/warehouses.xhtml"> Bodegas
                                         <f:ajax execute="@form" render="/views/warehouses.xhtml" />
                                     </h:commandLink> 
                                 </li>
-                                <li >
+                                <li style="display: #{controllerUsers.isChiefWarehouse ? 'inline' : 'none'} ">
                                     <h:commandLink class="btn btn-default" action="/views/document.xhtml"> Documentos
                                         <f:ajax execute="@form" render="/views/document.xhtml" />
                                     </h:commandLink> 
                                 </li>
-                                <li >
+                                <li style="display: #{controllerUsers.isChiefWarehouse ? 'none' : 'inline'} ">
 
                                     <h:commandLink class="btn btn-default" action="/views/reports.xhtml"> Reportes
                                         <f:ajax execute="@form" render="/views/reports.xhtml" />
