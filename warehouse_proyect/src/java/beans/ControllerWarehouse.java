@@ -99,7 +99,7 @@ public class ControllerWarehouse implements Serializable {
     }
     
     public void createW(){
-        title = "Crear Usuario";
+        title = "Crear Bodega";
         disabled = false;
         visibilityEdit = "none";
         visibilityUpdate = "none";
@@ -108,7 +108,7 @@ public class ControllerWarehouse implements Serializable {
     }
     
     public void searchW(){
-            title = "Buscar Usuario";
+            title = "Buscar Bodega";
             disabled = true;
             visibilityEdit = "inline";
             visibilityCreate = "none";
