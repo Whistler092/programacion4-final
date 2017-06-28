@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/resources/css/style.css</file>
+            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/views/reports.xhtml</file>
+            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/src/java/logica/Document.java</file>
             <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/index.xhtml</file>
-            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/resources/css/default.css</file>
-            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/resources/css/users.css</file>
-            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/resources/css/product.css</file>
-            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/templates/main.xhtml</file>
-            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/WEB-INF/glassfish-resources.xml</file>
-            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/resources/css/cssLayout.css</file>
+            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/src/java/logica/Products.java</file>
+            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/web/views/sharedViews/options.xhtml</file>
+            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/src/java/beans/ControllerUsers.java</file>
+            <file>file:/home/java-ws/workspace/programacion4-final/warehouse_proyect/src/java/beans/ControllerReports.java</file>
         </group>
     </open-files>
 </project-private>

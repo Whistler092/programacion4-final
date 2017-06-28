@@ -317,6 +317,7 @@ public class ControllerDocument implements Serializable {
                 alldd.add(dd2);
                 total +=  dd2.getDd().getPrice();
             }
+            temptd = d.getTypedocId().getTypedocId();
             visualTotal = new BigDecimal(total)+"";
             disabled = true;
             consecutive = false;
